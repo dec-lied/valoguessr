@@ -1,0 +1,21 @@
+The images for the minimaps were edited by me but all belong entirely to Mobalytics - mobalytics.gg
+
+ascent: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/ascent_map.svg
+bind: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/bind_map.svg
+breeze: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/breeze_map.svg
+fracture: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/fracture_map.svg
+haven: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/haven_map.svg
+pearl: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/pearl_map.svg
+split: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/split_map.svg
+
+The images of Valorant gameplay and splash art were all taken by me but all belong to Riot Games and were taken from their game Valorant
+The Valorant logo is used in various textures in ValoGuessr. All of these textures were made by me, but they all belong to Riot Games and their game Valorant.
+The font used in ValoGuessr was made by user Bryan T on dafont, the website from where I downloaded the font.
+
+sounds:
+
+The following sounds were all recorded by me, and thus all belong to Riot Games and were recorded from their game Valorant:
+valoclick.mp3
+valohover.mp3
+valomenu.mp3
+valoplayclick.mp3

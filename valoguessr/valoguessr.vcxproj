@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{f6c325ad-de03-46b1-93a6-b9c69f5748a7}</ProjectGuid>
+    <RootNamespace>valoguessr</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;irrKlang.lib;freetype.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\GLFW32;$(SolutionDir)lib\irrKlang32;$(SolutionDir)lib\FreeType32;</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;irrKlang.lib;freetype.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\GLFW32;$(SolutionDir)lib\irrKlang32;$(SolutionDir)lib\FreeType32;</AdditionalLibraryDirectories>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\GLFW64;$(SolutionDir)lib\irrKlang64;$(SolutionDir)lib\FreeType64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;irrKlang.lib;freetype.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\GLFW64;$(SolutionDir)lib\irrKlang64;$(SolutionDir)lib\FreeType64;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;irrKlang.lib;freetype.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="PointLine.cpp" />
+    <ClCompile Include="Round.cpp" />
+    <ClCompile Include="ScrollText.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="stb.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UIElement.cpp" />
+    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="ValoButton.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="CheckBox.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="PointLine.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Round.h" />
+    <ClInclude Include="ScrollText.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="UIElement.h" />
+    <ClInclude Include="UIManager.h" />
+    <ClInclude Include="ValoButton.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\button.frag" />
+    <None Include="shaders\button.vert" />
+    <None Include="shaders\image.frag" />
+    <None Include="shaders\image.vert" />
+    <None Include="shaders\text.frag" />
+    <None Include="shaders\text.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\valorant.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\valoclick.mp3" />
+    <Media Include="audio\valoclicky.mp3" />
+    <Media Include="audio\valohover.mp3" />
+    <Media Include="audio\valomenu.mp3" />
+    <Media Include="audio\valoplayclick.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+    <Image Include="images\maps\easy\aLever.png" />
+    <Image Include="images\maps\easy\aLobby.png" />
+    <Image Include="images\maps\easy\aMidGate.png" />
+    <Image Include="images\maps\easy\aPizza.png" />
+    <Image Include="images\maps\easy\aRafters.png" />
+    <Image Include="images\maps\easy\aTree.png" />
+    <Image Include="images\maps\easy\biAShort.png" />
+    <Image Include="images\maps\easy\biBShort.png" />
+    <Image Include="images\maps\easy\biElbow.png" />
+    <Image Include="images\maps\easy\biHeaven.png" />
+    <Image Include="images\maps\easy\biHookah.png" />
+    <Image Include="images\maps\easy\biUHaul.png" />
+    <Image Include="images\maps\easy\brATitties.png" />
+    <Image Include="images\maps\easy\brATTS.png" />
+    <Image Include="images\maps\easy\brBPeek.png" />
+    <Image Include="images\maps\easy\brHalls.png" />
+    <Image Include="images\maps\easy\brMid.png" />
+    <Image Include="images\maps\easy\brOn.png" />
+    <Image Include="images\maps\easy\brTitties.png" />
+    <Image Include="images\maps\easy\fA.png" />
+    <Image Include="images\maps\easy\fBHeaven.png" />
+    <Image Include="images\maps\easy\fBLong.png" />
+    <Image Include="images\maps\easy\fBLongFT.png" />
+    <Image Include="images\maps\easy\fBSite.png" />
+    <Image Include="images\maps\easy\fCTSpawn.png" />
+    <Image Include="images\maps\easy\hAShort.png" />
+    <Image Include="images\maps\easy\hCLong.png" />
+    <Image Include="images\maps\easy\hGarage.png" />
+    <Image Include="images\maps\easy\hHeaven.png" />
+    <Image Include="images\maps\easy\hMidWindow.png" />
+    <Image Include="images\maps\easy\hOutsideGarage.png" />
+    <Image Include="images\maps\easy\iADElevation.png" />
+    <Image Include="images\maps\easy\iAHeaven.png" />
+    <Image Include="images\maps\easy\iATElevation.png" />
+    <Image Include="images\maps\easy\iBHeaven.png" />
+    <Image Include="images\maps\easy\iMidElev.png" />
+    <Image Include="images\maps\easy\iOnTube.png" />
+    <Image Include="images\maps\easy\pABackSite.png" />
+    <Image Include="images\maps\easy\pArtCorner.png" />
+    <Image Include="images\maps\easy\pAShort.png" />
+    <Image Include="images\maps\easy\pBHeaven.png" />
+    <Image Include="images\maps\easy\pBLongCrevice.png" />
+    <Image Include="images\maps\easy\pCTMid.png" />
+    <Image Include="images\maps\easy\sAHeaven.png" />
+    <Image Include="images\maps\easy\sAMid.png" />
+    <Image Include="images\maps\easy\sAT.png" />
+    <Image Include="images\maps\easy\sBHeaven.png" />
+    <Image Include="images\maps\easy\sGarage.png" />
+    <Image Include="images\maps\easy\sRopes.png" />
+    <Image Include="images\maps\hard\aDog.png" />
+    <Image Include="images\maps\hard\aFish.png" />
+    <Image Include="images\maps\hard\aGate.png" />
+    <Image Include="images\maps\hard\aLobster.png" />
+    <Image Include="images\maps\hard\aTrash.png" />
+    <Image Include="images\maps\hard\aTSpawn.png" />
+    <Image Include="images\maps\hard\biBanner.png" />
+    <Image Include="images\maps\hard\biCacti.png" />
+    <Image Include="images\maps\hard\biPot.png" />
+    <Image Include="images\maps\hard\biTables.png" />
+    <Image Include="images\maps\hard\biTele.png" />
+    <Image Include="images\maps\hard\biView.png" />
+    <Image Include="images\maps\hard\brArchesPlank.png" />
+    <Image Include="images\maps\hard\brGem.png" />
+    <Image Include="images\maps\hard\brJailDoor.png" />
+    <Image Include="images\maps\hard\brLab.png" />
+    <Image Include="images\maps\hard\brShackWindow.png" />
+    <Image Include="images\maps\hard\brWitchDoor.png" />
+    <Image Include="images\maps\hard\fArcadeWall.png" />
+    <Image Include="images\maps\hard\fBUnderWall.png" />
+    <Image Include="images\maps\hard\fDanger.png" />
+    <Image Include="images\maps\hard\fEnergy.png" />
+    <Image Include="images\maps\hard\fHeavenCorner.png" />
+    <Image Include="images\maps\hard\fPosters.png" />
+    <Image Include="images\maps\hard\fUnderWall.png" />
+    <Image Include="images\maps\hard\hBells.png" />
+    <Image Include="images\maps\hard\hGreenBoxes.png" />
+    <Image Include="images\maps\hard\hMonitors.png" />
+    <Image Include="images\maps\hard\hSpawnCrate.png" />
+    <Image Include="images\maps\hard\hWallArt.png" />
+    <Image Include="images\maps\hard\hWallSmile.png" />
+    <Image Include="images\maps\hard\iBulletin.png" />
+    <Image Include="images\maps\hard\iCageSnowman.png" />
+    <Image Include="images\maps\hard\iCrouchSpot.png" />
+    <Image Include="images\maps\hard\iPoster.png" />
+    <Image Include="images\maps\hard\iSwagSnowman.png" />
+    <Image Include="images\maps\hard\iTwoDoors.png" />
+    <Image Include="images\maps\hard\pDoor.png" />
+    <Image Include="images\maps\hard\pNotes.png" />
+    <Image Include="images\maps\hard\pOnze.png" />
+    <Image Include="images\maps\hard\pSeaAnimals.png" />
+    <Image Include="images\maps\hard\pWallWindow.png" />
+    <Image Include="images\maps\hard\pWater.png" />
+    <Image Include="images\maps\hard\sKRoom.png" />
+    <Image Include="images\maps\hard\sMasks.png" />
+    <Image Include="images\maps\hard\sMonitors.png" />
+    <Image Include="images\maps\hard\sNeonStore.png" />
+    <Image Include="images\maps\hard\sPlug.png" />
+    <Image Include="images\maps\hard\sScuttle.png" />
+    <Image Include="images\maps\medium\aBoathouse.png" />
+    <Image Include="images\maps\medium\aCat.png" />
+    <Image Include="images\maps\medium\aCT2Mid.png" />
+    <Image Include="images\maps\medium\aMarket.png" />
+    <Image Include="images\maps\medium\aMidLink.png" />
+    <Image Include="images\maps\medium\aMidTop.png" />
+    <Image Include="images\maps\medium\biBags.png" />
+    <Image Include="images\maps\medium\biBox.png" />
+    <Image Include="images\maps\medium\biCrates.png" />
+    <Image Include="images\maps\medium\biElevator.png" />
+    <Image Include="images\maps\medium\biFountain.png" />
+    <Image Include="images\maps\medium\biGarage.png" />
+    <Image Include="images\maps\medium\brCTSpawn.png" />
+    <Image Include="images\maps\medium\brGutter.png" />
+    <Image Include="images\maps\medium\brHallsEntrance.png" />
+    <Image Include="images\maps\medium\brJail.png" />
+    <Image Include="images\maps\medium\brJukebox.png" />
+    <Image Include="images\maps\medium\brTWall.png" />
+    <Image Include="images\maps\medium\aDog2.png" />
+    <Image Include="images\maps\medium\aTree.png" />
+    <Image Include="images\maps\medium\fABox.png" />
+    <Image Include="images\maps\medium\fBUnder.png" />
+    <Image Include="images\maps\medium\fDish.png" />
+    <Image Include="images\maps\medium\fDoor.png" />
+    <Image Include="images\maps\medium\fDoorHeaven.png" />
+    <Image Include="images\maps\medium\fDrop.png" />
+    <Image Include="images\maps\medium\fGar.png" />
+    <Image Include="images\maps\medium\fHeaven.png" />
+    <Image Include="images\maps\medium\fSpawnBox.png" />
+    <Image Include="images\maps\medium\hAConn.png" />
+    <Image Include="images\maps\medium\hAHell.png" />
+    <Image Include="images\maps\medium\hALong.png" />
+    <Image Include="images\maps\medium\hDoors.png" />
+    <Image Include="images\maps\medium\hDragon.png" />
+    <Image Include="images\maps\medium\hTargets.png" />
+    <Image Include="images\maps\medium\iFridge.png" />
+    <Image Include="images\maps\medium\iMidGrill.png" />
+    <Image Include="images\maps\medium\iMidStuff.png" />
+    <Image Include="images\maps\medium\iTSpawnElevation.png" />
+    <Image Include="images\maps\medium\iTSpawnWindow.png" />
+    <Image Include="images\maps\medium\iUpTube.png" />
+    <Image Include="images\maps\medium\pAHall.png" />
+    <Image Include="images\maps\medium\pBLongFlowers.png" />
+    <Image Include="images\maps\medium\pBMidToArt.png" />
+    <Image Include="images\maps\medium\pBoxOpen.png" />
+    <Image Include="images\maps\medium\pGateEntrance.png" />
+    <Image Include="images\maps\medium\pMidOth.png" />
+    <Image Include="images\maps\medium\sAPillar.png" />
+    <Image Include="images\maps\medium\sBulletin.png" />
+    <Image Include="images\maps\medium\sFrog.png" />
+    <Image Include="images\maps\medium\sGaragePillar.png" />
+    <Image Include="images\maps\medium\sSewer.png" />
+    <Image Include="images\maps\medium\sTSpawnCubby.png" />
+    <Image Include="images\minimaps\ascentMap.png" />
+    <Image Include="images\minimaps\bindMap.png" />
+    <Image Include="images\minimaps\breezeMap.png" />
+    <Image Include="images\minimaps\fractureMap.png" />
+    <Image Include="images\minimaps\havenMap.png" />
+    <Image Include="images\minimaps\iceboxMap.png" />
+    <Image Include="images\minimaps\pearlMap.png" />
+    <Image Include="images\minimaps\splitMap.png" />
+    <Image Include="images\splashes\ascentSplash.png" />
+    <Image Include="images\splashes\bindSplash.png" />
+    <Image Include="images\splashes\breezeSplash.png" />
+    <Image Include="images\splashes\fractureSplash.png" />
+    <Image Include="images\splashes\havenSplash.png" />
+    <Image Include="images\splashes\iceboxSplash.png" />
+    <Image Include="images\splashes\pearlSplash.png" />
+    <Image Include="images\splashes\splitSplash.png" />
+    <Image Include="images\textures\checkedBox.png" />
+    <Image Include="images\textures\icon.ico" />
+    <Image Include="images\textures\icon.png" />
+    <Image Include="images\textures\marker.png" />
+    <Image Include="images\textures\uncheckedBox.png" />
+    <Image Include="images\textures\valomarker.png" />
+    <Image Include="images\tutorial\history.png" />
+    <Image Include="images\tutorial\home.png" />
+    <Image Include="images\tutorial\import.png" />
+    <Image Include="images\tutorial\play.png" />
+    <Image Include="images\tutorial\results.png" />
+    <Image Include="images\tutorial\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="valoguessr.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

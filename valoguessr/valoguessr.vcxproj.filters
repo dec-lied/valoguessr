@@ -1,0 +1,775 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\setup">
+      <UniqueIdentifier>{3d896021-aa19-49d0-877c-c59e091358f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\shaders">
+      <UniqueIdentifier>{40292fb5-ae6b-4228-8f95-b14436d129af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\fonts">
+      <UniqueIdentifier>{b1c6e4f8-3f18-490f-92dc-7debe41e0792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\audio">
+      <UniqueIdentifier>{3d706cff-d244-41eb-8285-8a43ce39640a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{ec8c840c-39a4-408c-ab17-1e94788ec916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images">
+      <UniqueIdentifier>{a121d9ca-81d8-4626-a295-5fc5ab4f83a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\valoguessr">
+      <UniqueIdentifier>{37290186-83f2-4a74-8cce-5c88b844c163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\textures">
+      <UniqueIdentifier>{a90c843e-e9c1-4b9d-ba06-4d800878a7f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\maps">
+      <UniqueIdentifier>{4e3e8298-bcbd-4168-ab76-7111d6919ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\minimaps">
+      <UniqueIdentifier>{e128fde9-fb86-4422-bb7e-cd09d7b48343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\maps\easy">
+      <UniqueIdentifier>{10345b02-9536-4d0e-9fee-e29d0170f21f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\maps\medium">
+      <UniqueIdentifier>{74754476-c263-42ad-8daf-a559d38ca763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\maps\hard">
+      <UniqueIdentifier>{a4c00083-7e84-40ef-819f-9df80d36a3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{3dc78a87-aa8a-4d25-899f-3567715454d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{34d009a5-2a2a-4b53-bcb9-5562ae4c8318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\images\splashes">
+      <UniqueIdentifier>{10da1bd7-bd2a-4524-b8b1-e9816c553958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\tutorial">
+      <UniqueIdentifier>{62f88b65-9281-4a66-bd02-de290aaf53ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stb.cpp">
+      <Filter>Source Files\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollText.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ValoButton.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Round.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLine.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollText.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ValoButton.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Round.h">
+      <Filter>Header Files\valoguessr</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files\valoguessr</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\valoguessr</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\valoguessr</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\valoguessr</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLine.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files\images</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\button.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\button.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\image.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\image.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\text.frag">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+    <None Include="shaders\text.vert">
+      <Filter>Resource Files\shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\valorant.ttf">
+      <Filter>Resource Files\fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\valoclick.mp3">
+      <Filter>Resource Files\audio</Filter>
+    </Media>
+    <Media Include="audio\valohover.mp3">
+      <Filter>Resource Files\audio</Filter>
+    </Media>
+    <Media Include="audio\valoplayclick.mp3">
+      <Filter>Resource Files\audio</Filter>
+    </Media>
+    <Media Include="audio\valomenu.mp3">
+      <Filter>Resource Files\audio</Filter>
+    </Media>
+    <Media Include="audio\valoclicky.mp3">
+      <Filter>Resource Files\audio</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\textures\checkedBox.png">
+      <Filter>Resource Files\images\textures</Filter>
+    </Image>
+    <Image Include="images\textures\uncheckedBox.png">
+      <Filter>Resource Files\images\textures</Filter>
+    </Image>
+    <Image Include="images\minimaps\ascentMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\minimaps\bindMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\minimaps\breezeMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\minimaps\fractureMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\minimaps\havenMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\minimaps\iceboxMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\minimaps\pearlMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\minimaps\splitMap.png">
+      <Filter>Resource Files\images\minimaps</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aDog2.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aTree.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\easy\aLever.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\aLobby.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\aPizza.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\aRafters.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\hard\aFish.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\aGate.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\aLobster.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\aTSpawn.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aBoathouse.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aCat.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aMarket.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aMidLink.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aMidTop.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\textures\valomarker.png">
+      <Filter>Resource Files\images\textures</Filter>
+    </Image>
+    <Image Include="images\textures\marker.png">
+      <Filter>Resource Files\images\textures</Filter>
+    </Image>
+    <Image Include="images\maps\easy\aMidGate.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aCT2Mid.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\hard\aTrash.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\easy\biAShort.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\biBShort.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\biElbow.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\biHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\biHookah.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\biUHaul.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\hard\biView.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\biBanner.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\biCacti.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\biPot.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\biTables.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\biTele.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\medium\biBags.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\biBox.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\biCrates.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\biElevator.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\biFountain.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\biGarage.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\easy\brTitties.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\brATitties.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\brBPeek.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\brHalls.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\brMid.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\brOn.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\hard\brWitchDoor.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\brArchesPlank.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\brGem.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\brJailDoor.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\brLab.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\brShackWindow.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\medium\brTWall.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\brCTSpawn.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\brGutter.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\brHallsEntrance.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\brJail.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\brJukebox.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\easy\aTree.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\hard\aDog.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aMarket.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\aBoathouse.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\easy\fCTSpawn.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\fA.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\fBHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\fBLong.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\fBLongFT.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\fBSite.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\hard\fArcadeWall.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\fBUnderWall.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\fEnergy.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\fHeavenCorner.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\fPosters.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\fUnderWall.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fABox.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fBUnder.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fDoor.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fDrop.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fGar.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fHeaven.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\textures\icon.png">
+      <Filter>Resource Files\images\textures</Filter>
+    </Image>
+    <Image Include="images\splashes\ascentSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\splashes\bindSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\splashes\breezeSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\splashes\fractureSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\splashes\havenSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\splashes\iceboxSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\splashes\pearlSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\splashes\splitSplash.png">
+      <Filter>Resource Files\images\splashes</Filter>
+    </Image>
+    <Image Include="images\maps\easy\brATTS.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\hAShort.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\hCLong.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\hGarage.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\hHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\hMidWindow.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\hOutsideGarage.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\iADElevation.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\iAHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\iATElevation.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\iBHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\iMidElev.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\iOnTube.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\pABackSite.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\pArtCorner.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\pAShort.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\pBHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\pBLongCrevice.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\pCTMid.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\sAHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\sAMid.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\sAT.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\sBHeaven.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\sGarage.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\easy\sRopes.png">
+      <Filter>Resource Files\images\maps\easy</Filter>
+    </Image>
+    <Image Include="images\maps\hard\fDanger.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\hBells.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\hGreenBoxes.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\hMonitors.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\hSpawnCrate.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\hWallArt.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\hWallSmile.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\iBulletin.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\iCageSnowman.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\iCrouchSpot.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\iPoster.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\iSwagSnowman.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\iTwoDoors.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\pDoor.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\pNotes.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\pOnze.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\pSeaAnimals.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\pWallWindow.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\pWater.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\sKRoom.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\sMasks.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\sMonitors.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\sNeonStore.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\sPlug.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\hard\sScuttle.png">
+      <Filter>Resource Files\images\maps\hard</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fDish.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fDoorHeaven.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\fSpawnBox.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\hAConn.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\hAHell.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\hALong.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\hDoors.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\hDragon.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\hTargets.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\iFridge.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\iMidGrill.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\iMidStuff.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\iTSpawnElevation.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\iTSpawnWindow.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\iUpTube.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\pAHall.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\pBLongFlowers.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\pBMidToArt.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\pBoxOpen.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\pGateEntrance.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\pMidOth.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\sAPillar.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\sBulletin.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\sFrog.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\sGaragePillar.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\sSewer.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\maps\medium\sTSpawnCubby.png">
+      <Filter>Resource Files\images\maps\medium</Filter>
+    </Image>
+    <Image Include="images\tutorial\history.png">
+      <Filter>Resource Files\tutorial</Filter>
+    </Image>
+    <Image Include="images\tutorial\home.png">
+      <Filter>Resource Files\tutorial</Filter>
+    </Image>
+    <Image Include="images\tutorial\import.png">
+      <Filter>Resource Files\tutorial</Filter>
+    </Image>
+    <Image Include="images\tutorial\play.png">
+      <Filter>Resource Files\tutorial</Filter>
+    </Image>
+    <Image Include="images\tutorial\results.png">
+      <Filter>Resource Files\tutorial</Filter>
+    </Image>
+    <Image Include="images\tutorial\settings.png">
+      <Filter>Resource Files\tutorial</Filter>
+    </Image>
+    <Image Include="images\textures\icon.ico">
+      <Filter>Resource Files\images\textures</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>Resource Files\images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="valoguessr.rc">
+      <Filter>Resource Files\images</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
