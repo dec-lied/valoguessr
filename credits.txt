@@ -5,6 +5,7 @@ bind: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/bind_map.svg
 breeze: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/breeze_map.svg
 fracture: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/fracture_map.svg
 haven: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/haven_map.svg
+icebox: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/icebox_map.svg
 pearl: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/pearl_map.svg
 split: https://cdn.mobalytics.gg/assets/valorant/images/maps/levels/split_map.svg
 
