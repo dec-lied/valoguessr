@@ -1,4 +1,0 @@
-CompileFlags:
-    Add:
-        - "--include-directory=../include"
-        - "-std=c++20"
