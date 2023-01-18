@@ -2869,11 +2869,11 @@ void Yui::setHistory()
 					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					// determines which button has been pressed to export
-					for (int i = 0; i < (Yui::UIElements.size() - 6) / 2; i++)
+					for (size_t i = 0; i < (Yui::UIElements.size() - 6) / 2; i++)
 					{
 						if (ui2b(7 + (i * 2))->hovering)
 						{
-							Yui::exportGame(i);
+							Yui::exportGame((unsigned)i);
 
 							ui2b(7 + (i * 2))->text->changeText("Copied!");
 							ui2b(7 + (i * 2))->update();
@@ -2883,7 +2883,7 @@ void Yui::setHistory()
 				[]()
 				{
 					// resets all buttons to say "Export"
-					for (int i = 0; i < (Yui::UIElements.size() - 6) / 2; i++)
+					for (size_t i = 0; i < (Yui::UIElements.size() - 6) / 2; i++)
 					{
 						ui2b(7 + (i * 2))->text->changeText("Export");
 						ui2b(7 + (i * 2))->update();
@@ -2896,9 +2896,10 @@ void Yui::setHistory()
 		if (GM::config.games[((Yui::historyPage - 1) * 4) + i].gameType == GameType::IMPORT)
 			ui2t(6 + 2 * i)->textColor = glm::vec4(0.433f, 0.433f, 0.433f, 1.0f);
 
-		tm* lt = localtime(&GM::config.games[((Yui::historyPage - 1) * 4) + i].time);
+		tm lt;
+		localtime_s(&lt, &GM::config.games[((Yui::historyPage - 1) * 4) + i].time);
 
-		ui2t(6 + (2 * i))->changeText(std::format("{}/{}/{} {}:{}{}\tPoints: {}", 1 + lt->tm_mon, lt->tm_mday, 1900 + lt->tm_year, lt->tm_hour, (lt->tm_min < 10) ? "0" : "", lt->tm_min, GM::config.games[Yui::historyPage * i].sumOfRounds()));
+		ui2t(6 + (2 * i))->changeText(std::format("{}/{}/{} {}:{}{}\tPoints: {}", 1 + lt.tm_mon, lt.tm_mday, 1900 + lt.tm_year, lt.tm_hour, (lt.tm_min < 10) ? "0" : "", lt.tm_min, GM::config.games[Yui::historyPage * i].sumOfRounds()));
 	}
 
 	Yui::updateAll();

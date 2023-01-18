@@ -3,6 +3,7 @@
 /Release
 /x64
 /valoguessr/x64
+/valoguessr/Debug
 /valoguessr/Release
 /valoguessr/config/
 /valoguessr/*.dll

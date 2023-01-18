@@ -11,7 +11,7 @@ Map::Map()
 Map::Map(std::string mapPath, glm::vec2 correctCoords)
 	: correctCoords(correctCoords)
 {
-	strncpy(this->mapPath, mapPath.c_str(), strlen(mapPath.c_str()) + 1);
+	strncpy_s(this->mapPath, mapPath.c_str(), strlen(mapPath.c_str()) + 1);
 
 	// assigns what map type this object is based on filename
 	switch (mapPath.at(0))

@@ -138,10 +138,6 @@ int main()
 		glClearColor(0.059f, 0.094f, 0.133f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		int x = 10;
-
-		int* xPtr = &x;
-
 		if (focused)
 			processInput(window);
 

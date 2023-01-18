@@ -76,7 +76,7 @@ void Config::deserialize()
 	this->resetSettings();
 
 	// std::ios::ate starts ifstream at end, so this is the final byte #
-	size_t endByte = ifstream.tellg();
+	size_t endByte = (size_t)ifstream.tellg();
 	ifstream.seekg(std::ios::beg);
 
 	// deserializes file info into pointer
