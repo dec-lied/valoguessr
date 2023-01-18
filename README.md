@@ -1,8 +1,14 @@
 # ValoGuessr
 
-ValoGuessr is a windows desktop application inspired by GeoGuessr for Valorant!
+ValoGuessr is an open source GeoGuessr-esque windows desktop application for Valorant!
 
-It is written entirely in C++, using OpenGL and GLFW for graphics and feature my custom (elementary) framework engine!
+I made this game for my HL IB Computer Science Internal Assessment (although mostly for fun and experience) which was taking place in December of 2022.
+At that time, there were only 8 maps, with Pearl being the most recent map. I do not plan to add any future maps, but if people really want it then I will!
+
+## Features
+* This game is written entirely in C++, using barebones OpenGL and GLFW for graphics and features my custom (elementary) UI engine!
+* All of your game data is saved in a local file, so all of your previous games, achievements, and stats are saved forever!
+* You can share your previous games with friends or replay them yourself and compare the scores!
 
 ## How to run
 In the releases tab, download the newest release, navigate to the /bin folder, and run valoguessr.exe.
@@ -12,7 +18,8 @@ Opening the sln file in Visual Studio will allow you to easily build the game fr
 
 The Debug build mode should only be used for running the game from Visual Studio, as the paths for the assets are dependent on it.
 
-The Release build mode is what should be used when compiling the executable. Create a /bin folder in /valoguessr and place the newly created valoguessr.exe into /valoguessr/bin.
+The Release build mode is what should be used when compiling the standalone executable.
+Create a /bin folder in /valoguessr and place the newly created valoguessr.exe into /valoguessr/bin.
 Then place the appropriate dlls from the /dlls folder in the same directory as valoguessr.exe, which should be /valoguessr/bin.
 
 ## Dependencies
@@ -38,12 +45,13 @@ The minimap images were edited by me but were all taken from mobalytics.gg.
 
 The images of Valorant gameplay and splash art were all taken by me but all belong to Riot Games and were taken from their game Valorant.
 
-The Valorant logo is used in various textures in ValoGuessr. All of these textures were made by me but belong to Riot Games.
+The Valorant logo is used in various textures in ValoGuessr. All of these textures were created by me but contain assets belonging to Riot Games.
 
-The font used in ValoGuessr was made by user Bryan T on dafont, the website from where I downloaded the font.
+The font used in ValoGuessr was made by user [Brylark on dafont](https://www.dafont.com/valorant.font).
 
 The following sounds were all recorded by me from Riot Games's game Valorant:
 * valoclick.mp3
+* valoclicky.mp3
 * valohover.mp3
 * valomenu.mp3
 * valoplayclick.mp3
