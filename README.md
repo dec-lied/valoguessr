@@ -10,11 +10,17 @@ At that time, there were only 8 maps, with Pearl being the most recent map. I do
 * All of your game data is saved in a local file, so all of your previous games, achievements, and stats are saved forever!
 * You can share your previous games with friends or replay them yourself and compare the scores!
 
+## Screenshots
+![mainMenu](../screenshots/mainMenu.png)
+![play](../screenshots/play.png)
+![settings](../screenshots/settings.png)
+
 ## How to run
 In the releases tab, download the newest release, navigate to the /bin folder, and run valoguessr.exe.
 
 ## Bulding from source
-Opening the sln file in Visual Studio will allow you to easily build the game from the source code.
+First, run ```git clone https://github.com/declspecl/ValoGuessr```.
+Then, navigate inside the ValoGuessr folder and open the sln file in Visual Studio, allowing you to easily build the game from the source.
 
 The Debug build mode should only be used for running the game from Visual Studio, as the paths for the assets are dependent on it.
 
