@@ -11,9 +11,10 @@ At that time, there were only 8 maps, with Pearl being the most recent map. I do
 * You can share your previous games with friends or replay them yourself and compare the scores!
 
 ## Screenshots
-![mainMenu](../screenshots/mainMenu.png)
-![play](../screenshots/play.png)
-![settings](../screenshots/settings.png)
+These are just a few screenshots to show what the UI looks like:
+<img src="../screenshots/mainMenu.png" width="650" height="370">
+<img src="../screenshots/play.png" width="650" height="370">
+<img src="../screenshots/settings.png" width="650" height="370">
 
 ## How to run
 In the releases tab, download the newest release, navigate to the /bin folder, and run valoguessr.exe.
