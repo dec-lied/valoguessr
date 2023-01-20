@@ -11,7 +11,7 @@ At that time, there were only 8 maps, with Pearl being the most recent map. I do
 * You can share your previous games with friends or replay them yourself and compare the scores!
 
 ## Screenshots
-These are just a few screenshots to show what the UI looks like:
+These are just a few screenshots to show what the UI looks like. If you would like to see more screenshots, go to the screenshots branch of this repo.
 <img src="../screenshots/mainMenu.png" width="650" height="370">
 <img src="../screenshots/play.png" width="650" height="370">
 <img src="../screenshots/settings.png" width="650" height="370">
