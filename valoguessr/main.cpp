@@ -32,7 +32,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 	UIElement::projection = glm::ortho(0.0f, (float)width, 0.0f, (float)height);
 
-	Yui::updateAll();
+	Yui::getInstance().updateAll();
 
 	glViewport(0, 0, width, height);
 }
@@ -127,10 +127,15 @@ int main()
 
 	GM::init();
 #ifdef _DEBUG
-	Yui::init(".\\fonts\\valorant.ttf", &ratioW, &ratioH, 130);
+	Yui::getInstance().init(".\\fonts\\valorant.ttf", &ratioW, &ratioH, 130);
 #else
-	Yui::init(".\\..\\fonts\\valorant.ttf", &ratioW, &ratioH, 130);
+	Yui::getInstance().init(".\\..\\fonts\\valorant.ttf", &ratioW, &ratioH, 130);
 #endif
+
+	if (std::filesystem::exists(PATH_PREFIX.append("config\\config.valog").c_str()))
+		Yui::getInstance().loadScene(0);
+	else
+		Yui::getInstance().loadScene(10);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -141,7 +146,7 @@ int main()
 		if (focused)
 			processInput(window);
 
-        Yui::renderAll();
+        Yui::getInstance().renderAll();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -151,7 +156,6 @@ int main()
 		Cleanup
 	*/
 	GM::cleanup();
-	Yui::cleanup();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
@@ -159,7 +163,7 @@ int main()
 
 void processInput(GLFWwindow* window)
 {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || Yui::toClose)
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || Yui::getInstance().toClose)
 		glfwSetWindowShouldClose(window, true);
 
 	glfwGetCursorPos(window, &GM::mouseX, &GM::mouseY);
@@ -179,12 +183,12 @@ void processInput(GLFWwindow* window)
 		clicking = false;
 	}
 
-	for (UIElement* element : Yui::UIElements)
+	for (UIElement* element : Yui::getInstance().UIElements)
 	{
 		Button* bp = dynamic_cast<Button*>(element);
 		if (bp && bp->isHovering((float)GM::mouseX, (float)GM::mouseY))
 		{
-			if (clicking && Yui::playable)
+			if (clicking && Yui::getInstance().playable)
 			{
 				bool toChange = bp->changesScene; // need to copy value because onClick may deallocate bp
 				bp->onClick();

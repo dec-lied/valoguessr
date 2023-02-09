@@ -27,21 +27,16 @@
 * scale down markers, make them look better														Y
 */
 
-std::vector<UIElement*> Yui::UIElements;
+Yui& Yui::getInstance()
+{
+	static Yui instance;
 
-irrklang::ISoundEngine* Yui::soundEngine;
-irrklang::ISoundSource* Yui::menuBGM;
-
-unsigned Yui::scene = 0, Yui::historyPage = 1, Yui::exportCount = 0, Yui::tutorialPage = 0;
-
-bool Yui::toClose = false, Yui::playable = true, Yui::minimapScaled = false;
-
-Image* Yui::marker = nullptr;
-float Yui::markerRelX, Yui::markerRelY;
+	return instance;
+}
 
 void Yui::addElement(UIElement* element)
 {
-	Yui::UIElements.push_back(element);
+	Yui::getInstance().UIElements.push_back(element);
 }
 
 void Yui::addElements(unsigned count, ...)
@@ -50,7 +45,7 @@ void Yui::addElements(unsigned count, ...)
 	va_start(args, count);
 
 	for (unsigned i = 0; i < count; i++)
-		Yui::UIElements.push_back(va_arg(args, UIElement*));
+		Yui::getInstance().UIElements.push_back(va_arg(args, UIElement*));
 
 	va_end(args);
 }
@@ -60,9 +55,9 @@ void Yui::removeElement(UIElement* element)
 	size_t index;
 	bool contains = false;
 
-	for (index = 0; index < Yui::UIElements.size(); index++)
+	for (index = 0; index < Yui::getInstance().UIElements.size(); index++)
 	{
-		if (Yui::UIElements[index] == element)
+		if (Yui::getInstance().UIElements[index] == element)
 		{
 			contains = true;
 			break;
@@ -71,8 +66,8 @@ void Yui::removeElement(UIElement* element)
 
 	if (contains)
 	{
-		delete Yui::UIElements[index];
-		Yui::UIElements.erase(Yui::UIElements.begin() + index);
+		delete Yui::getInstance().UIElements[index];
+		Yui::getInstance().UIElements.erase(Yui::getInstance().UIElements.begin() + index);
 	}
 	else
 	{
@@ -84,24 +79,41 @@ void Yui::removeElement(UIElement* element)
 
 void Yui::purgeElements()
 {
-	for (size_t i = 0; i < Yui::UIElements.size(); i++)
-		delete Yui::UIElements[i];
+	for (size_t i = 0; i < Yui::getInstance().UIElements.size(); i++)
+		delete Yui::getInstance().UIElements[i];
 
-	Yui::UIElements.clear();
+	Yui::getInstance().UIElements.clear();
 
-	Yui::marker = nullptr;
+	Yui::getInstance().marker = nullptr;
 }
 
 void Yui::updateAll()
 {
-	for (UIElement* element : Yui::UIElements)
+	for (UIElement* element : Yui::getInstance().UIElements)
 		element->update();
 }
 
 void Yui::renderAll()
 {
-	for (UIElement* element : Yui::UIElements)
+	for (UIElement* element : Yui::getInstance().UIElements)
 		element->render();
+}
+
+Yui::Yui()
+	: soundEngine(irrklang::createIrrKlangDevice())
+	, menuBGM(nullptr)
+	, scene(0)
+	, historyPage(1)
+	, exportCount(0)
+	, tutorialPage(0)
+	, toClose(false)
+	, playable(true)
+	, minimapScaled(false)
+	, marker(nullptr)
+	, markerRelX(0.0)
+	, markerRelY(0.0)
+{
+	::srand((unsigned)::time(0));
 }
 
 void Yui::init(const char* fontName, float* ratioW, float* ratioH, unsigned pixelHeight)
@@ -109,33 +121,26 @@ void Yui::init(const char* fontName, float* ratioW, float* ratioH, unsigned pixe
 	UIElement::projection = glm::ortho(0.0f, (float)*UIElement::WINDOWWIDTH, 0.0f, (float)*UIElement::WINDOWHEIGHT);
 	ScrollText::scrollSpeed = 10.0f;
 
-	::srand((unsigned)::time(0));
-
 	GM::init();
 	Text::init(fontName, ratioW, ratioH, pixelHeight);
 	Image::init();
 	Button::init();
 	CheckBox::init();
 
-	Yui::soundEngine = irrklang::createIrrKlangDevice();
-	Yui::soundEngine->setSoundVolume(1.0f);
+	Yui::getInstance().soundEngine = irrklang::createIrrKlangDevice();
+	Yui::getInstance().soundEngine->setSoundVolume(1.0f);
 
-	Yui::menuBGM = Yui::soundEngine->addSoundSourceFromFile(PATH_PREFIX.append("audio\\valomenu.mp3").c_str());
+	Yui::menuBGM = Yui::getInstance().soundEngine->addSoundSourceFromFile(PATH_PREFIX.append("audio\\valomenu.mp3").c_str());
 
-	Yui::UIElements.reserve(25);
-
-	if (std::filesystem::exists(PATH_PREFIX.append("config\\config.valog").c_str()))
-		Yui::loadScene(0);
-	else
-		Yui::loadScene(10);
+	Yui::getInstance().UIElements.reserve(25);
 }
 
-void Yui::cleanup()
+Yui::~Yui()
 {
-	Yui::purgeElements();
+	Yui::getInstance().purgeElements();
 
-	Yui::soundEngine->stopAllSounds();
-	Yui::soundEngine->drop();
+	Yui::getInstance().soundEngine->stopAllSounds();
+	Yui::getInstance().soundEngine->drop();
 
 	Text::cleanup();
 	CheckBox::cleanup();
@@ -151,7 +156,7 @@ void Yui::cleanup()
 void Yui::loadScene(unsigned sceneID)
 {
 	Yui::scene = sceneID;
-	Yui::purgeElements();
+	Yui::getInstance().purgeElements();
 
 	Yui::playable = true;
 
@@ -159,10 +164,10 @@ void Yui::loadScene(unsigned sceneID)
 	{
 	case 0: // main menu
 	{
-		if (!Yui::soundEngine->isCurrentlyPlaying(Yui::menuBGM))
-			Yui::soundEngine->play2D(Yui::menuBGM, true);
+		if (!Yui::getInstance().soundEngine->isCurrentlyPlaying(Yui::menuBGM))
+			Yui::getInstance().soundEngine->play2D(Yui::menuBGM, true);
 
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			7,
 			new Button
@@ -189,12 +194,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(1);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(1);
 				}
 			),
 			new Button
@@ -208,12 +213,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(2);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(2);
 				}
 			),
 			new ValoButton
@@ -228,12 +233,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.871f, 0.281f, 0.332f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
-					Yui::loadScene(5);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
+					Yui::getInstance().loadScene(5);
 				}
 			),
 			new Button
@@ -247,12 +252,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(3);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(3);
 				}
 			),
 			new Button
@@ -266,14 +271,14 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
 
-					Yui::historyPage = 1;
-					Yui::loadScene(4);
+					Yui::getInstance().historyPage = 1;
+					Yui::getInstance().loadScene(4);
 				}
 			),
 			new ScrollText
@@ -288,14 +293,14 @@ void Yui::loadScene(unsigned sceneID)
 			)
 		);
 
-		((ScrollText*)Yui::UIElements[6])->inf = true;
+		((ScrollText*)Yui::getInstance().UIElements[6])->inf = true;
 
 		break;
 	}
 
 	case 1: // achievements
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			19,
 			new Button
@@ -322,12 +327,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(0);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(0);
 				}
 			),
 			new ValoButton
@@ -385,7 +390,7 @@ void Yui::loadScene(unsigned sceneID)
 
 	case 2: // stats
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			16,
 			new Button
@@ -412,12 +417,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(0);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(0);
 				}
 			),
 			new ValoButton
@@ -465,15 +470,15 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					GM::config.resetSHA();
 
-					Yui::setStats();
+					Yui::getInstance().setStats();
 				},
 				[]() {},
 				false
@@ -494,7 +499,7 @@ void Yui::loadScene(unsigned sceneID)
 
 	case 3: // settings
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			19,
 			new Button
@@ -521,12 +526,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(0);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(0);
 				}
 			),
 			new ValoButton
@@ -571,14 +576,14 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					GM::config.difficulty = 1;
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -595,14 +600,14 @@ void Yui::loadScene(unsigned sceneID)
 				[](){},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					GM::config.difficulty = 2;
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -619,14 +624,14 @@ void Yui::loadScene(unsigned sceneID)
 				[](){},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					GM::config.difficulty = 3;
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Text("MAps Allowed:", 0.5f, 0.475f, 0.5f, 0.5f, glm::vec4(1.0f, 0.984f, 0.961f, 1.0f)),
@@ -644,7 +649,7 @@ void Yui::loadScene(unsigned sceneID)
 				[](){},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[0])
 					{
@@ -654,11 +659,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[0] = !GM::config.mapChoice[0];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -675,7 +680,7 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[1])
 					{
@@ -685,11 +690,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[1] = !GM::config.mapChoice[1];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -706,7 +711,7 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[2])
 					{
@@ -716,11 +721,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[2] = !GM::config.mapChoice[2];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -737,7 +742,7 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[3])
 					{
@@ -747,11 +752,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[3] = !GM::config.mapChoice[3];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -768,7 +773,7 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[4])
 					{
@@ -778,11 +783,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[4] = !GM::config.mapChoice[4];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -799,7 +804,7 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[5])
 					{
@@ -809,11 +814,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[5] = !GM::config.mapChoice[5];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -830,7 +835,7 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[6])
 					{
@@ -840,11 +845,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[6] = !GM::config.mapChoice[6];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -861,7 +866,7 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
 					if (GM::config.mapChoice[7])
 					{
@@ -871,11 +876,11 @@ void Yui::loadScene(unsigned sceneID)
 					else
 						GM::config.mapChoice[7] = !GM::config.mapChoice[7];
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
 				{
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			),
 			new Button
@@ -892,16 +897,16 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					GM::config.resetSettings();
 
-					Yui::setSettingsButtons();
+					Yui::getInstance().setSettingsButtons();
 				}
 			)
 		);
 
-		Yui::setSettingsButtons();
+		Yui::getInstance().setSettingsButtons();
 
 		break;
 	}
@@ -915,7 +920,7 @@ void Yui::loadScene(unsigned sceneID)
 
 	case 5: // play selection screen
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			11,
 			new Button
@@ -942,12 +947,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(0);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(0);
 				}
 			),
 			new ValoButton
@@ -970,16 +975,16 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
 
 					GM::newGame();
 
 					if (GM::filteredMaps.size() >= 5)
-						Yui::loadScene(6);
+						Yui::getInstance().loadScene(6);
 					else
 					{
 						GM::stopGame(false);
-						Yui::loadScene(100);
+						Yui::getInstance().loadScene(100);
 					}
 				}
 			),
@@ -991,17 +996,17 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
 					GM::config.achievements[0] = 0b1;
 
 					GM::newFreeplay();
 
 					if (GM::filteredMaps.size() >= 5)
-						Yui::loadScene(6);
+						Yui::getInstance().loadScene(6);
 					else
 					{
 						GM::stopGame(false);
-						Yui::loadScene(100);
+						Yui::getInstance().loadScene(100);
 					}
 				}
 			),
@@ -1013,8 +1018,8 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(10);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(10);
 				}
 			),
 			new Text("TUTORIAL", 0.25f, 0.218f, 0.8f, 0.8f, glm::vec4(1.0f, 0.984f, 0.961f, 1.0f)),
@@ -1025,10 +1030,10 @@ void Yui::loadScene(unsigned sceneID)
 				[]() {},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
 
-					Yui::tutorialPage = 0;
-					Yui::loadScene(11);
+					Yui::getInstance().tutorialPage = 0;
+					Yui::getInstance().loadScene(11);
 				}
 			),
 			new Text("IMPORT", 0.75f, 0.218f, 0.8f, 0.8f, glm::vec4(1.0f, 0.984f, 0.961f, 1.0f))
@@ -1088,7 +1093,7 @@ void Yui::loadScene(unsigned sceneID)
 				break; 
 		}
 
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			4,
 			new Image(diffPath + std::string(GM::gameSlot->getCurrentRound().map.mapPath), false, 0.5f, 0.5f, 1.0, 1.0f),
@@ -1112,7 +1117,7 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.1f),
 				[]()
 				{
-					if (!Yui::minimapScaled)
+					if (!Yui::getInstance().minimapScaled)
 					{
 						ui2b(2)->centerX = 1.0f - (scaledMinimapWidth / 2.0f);
 						ui2b(2)->centerY = scaledMinimapHeight / 2.0f;
@@ -1124,20 +1129,20 @@ void Yui::loadScene(unsigned sceneID)
 						ui2b(2)->image->width = ui2b(2)->width;
 						ui2b(2)->image->height = ui2b(2)->height;
 
-						Yui::minimapScaled = true;
+						Yui::getInstance().minimapScaled = true;
 
 						ui2b(2)->update();
-						Yui::updateMarker();
+						Yui::getInstance().updateMarker();
 					}
 				},
 				[]()
 				{
-					Yui::setMarker();
+					Yui::getInstance().setMarker();
 					ui2b(3)->visible = true;
 				},
 				[]()
 				{
-					if (Yui::minimapScaled)
+					if (Yui::getInstance().minimapScaled)
 					{
 						ui2b(2)->centerX = 1.0f - (unscaledMinimapWidth / 2.0f);
 						ui2b(2)->centerY = unscaledMinimapHeight / 2.0f;
@@ -1149,10 +1154,10 @@ void Yui::loadScene(unsigned sceneID)
 						ui2b(2)->image->width = ui2b(2)->width;
 						ui2b(2)->image->height = ui2b(2)->height;
 
-						Yui::minimapScaled = false;
+						Yui::getInstance().minimapScaled = false;
 						
 						ui2b(2)->update();
-						Yui::updateMarker();
+						Yui::getInstance().updateMarker();
 					}
 				},
 				false
@@ -1170,18 +1175,18 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
 
-					GM::gameSlot->nextRound(glm::vec2(Yui::markerRelX, Yui::markerRelY));
+					GM::gameSlot->nextRound(glm::vec2(Yui::getInstance().markerRelX, Yui::getInstance().markerRelY));
 
 					if (GM::gameSlot->gameType == GameType::STANDARD || GM::gameSlot->gameType == GameType::IMPORT)
-						Yui::loadScene(7);
+						Yui::getInstance().loadScene(7);
 					else if (GM::gameSlot->gameType == GameType::FREEPLAY)
-						Yui::loadScene(9);
+						Yui::getInstance().loadScene(9);
 				}
 			)
 		);
@@ -1234,7 +1239,7 @@ void Yui::loadScene(unsigned sceneID)
 			break;
 		}
 
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			9,
 			new Button
@@ -1299,20 +1304,20 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					if (Game::roundIndex < 5)
-						Yui::loadScene(6);
+						Yui::getInstance().loadScene(6);
 					else
 					{
 						if (GM::gameSlot->gameType == GameType::STANDARD)
-							Yui::loadScene(8);
+							Yui::getInstance().loadScene(8);
 						else
-							Yui::loadScene(12);
+							Yui::getInstance().loadScene(12);
 					}
 				}
 			),
@@ -1455,7 +1460,7 @@ void Yui::loadScene(unsigned sceneID)
 			}
 
 			float roundRecapOpacity = 0.15f;
-			Yui::addElements
+			Yui::getInstance().addElements
 			(
 				4,
 				new Button
@@ -1505,7 +1510,7 @@ void Yui::loadScene(unsigned sceneID)
 			);
 		}
 
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			6,
 			new Button
@@ -1562,21 +1567,21 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					GM::stopGame(true);
 					GM::newGame();
 
 					if (GM::filteredMaps.size() >= 5)
-						Yui::loadScene(6);
+						Yui::getInstance().loadScene(6);
 					else
 					{
 						GM::stopGame(false);
-						Yui::loadScene(100);
+						Yui::getInstance().loadScene(100);
 					}
 				}
 			),
@@ -1593,15 +1598,15 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					GM::stopGame(true);
 
-					Yui::loadScene(0);
+					Yui::getInstance().loadScene(0);
 				}
 			)
 		);
@@ -1652,7 +1657,7 @@ void Yui::loadScene(unsigned sceneID)
 			break;
 		}
 
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			11,
 			new Button
@@ -1726,13 +1731,13 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
-					Yui::loadScene(6);
+					Yui::getInstance().loadScene(6);
 				}
 			),
 			new Button
@@ -1756,15 +1761,15 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					GM::stopGame(false);
 
-					Yui::loadScene(0);
+					Yui::getInstance().loadScene(0);
 				}
 			),
 			new Button
@@ -1834,7 +1839,7 @@ void Yui::loadScene(unsigned sceneID)
 
 	case 11: // import screen
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			9,
 			new Button
@@ -1861,12 +1866,12 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::loadScene(0);
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().loadScene(0);
 				}
 			),
 			new ValoButton
@@ -1909,11 +1914,11 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
 
 					ui2t(7)->visible = false;
 
@@ -1938,15 +1943,15 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
 
 					ui2t(7)->visible = false;
 
-					ui2t(3)->changeText(Yui::clipboardText());
+					ui2t(3)->changeText(Yui::getInstance().clipboardText());
 					ui2t(3)->update();
 
 					ui2b(8)->visible = true;
@@ -1968,17 +1973,17 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
 
 					if (GM::validateImportString())
 					{
 						GM::newImport(ui2t(3)->text);
 
-						Yui::loadScene(6);
+						Yui::getInstance().loadScene(6);
 					}
 					else
 						ui2t(7)->visible = true;
@@ -2084,7 +2089,7 @@ void Yui::loadScene(unsigned sceneID)
 			}
 
 			float roundRecapOpacity = 0.15f;
-			Yui::addElements
+			Yui::getInstance().addElements
 			(
 				4,
 				new Button
@@ -2134,7 +2139,7 @@ void Yui::loadScene(unsigned sceneID)
 			);
 		}
 
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			9,
 			new Button
@@ -2227,15 +2232,15 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					GM::stopGame(true);
 
-					Yui::loadScene(0);
+					Yui::getInstance().loadScene(0);
 				}
 			)
 		);
@@ -2245,7 +2250,7 @@ void Yui::loadScene(unsigned sceneID)
 
 	case 100:
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			6,
 			new Button
@@ -2322,11 +2327,11 @@ void Yui::loadScene(unsigned sceneID)
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::toClose = true;
+					Yui::getInstance().toClose = true;
 				}
 			)
 		);
@@ -2335,7 +2340,7 @@ void Yui::loadScene(unsigned sceneID)
 	}
 
 	default:
-		Yui::loadScene(0);
+		Yui::getInstance().loadScene(0);
 
 		break;
 	}
@@ -2444,8 +2449,8 @@ void Yui::setSettingsButtons()
 
 void Yui::setTutorial()
 {
-	Yui::purgeElements();
-	Yui::addElements
+	Yui::getInstance().purgeElements();
+	Yui::getInstance().addElements
 	(
 		6,
 		new Button
@@ -2472,12 +2477,12 @@ void Yui::setTutorial()
 			glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 			[]()
 			{
-				Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+				Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 			},
 			[]()
 			{
-				Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-				Yui::loadScene(0);
+				Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+				Yui::getInstance().loadScene(0);
 			}
 		),
 		new ValoButton
@@ -2509,18 +2514,18 @@ void Yui::setTutorial()
 			glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 			[]()
 			{
-				if (Yui::tutorialPage > 0)
+				if (Yui::getInstance().tutorialPage > 0)
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				}
 			},
 			[]()
 			{
-				if (Yui::tutorialPage > 0)
+				if (Yui::getInstance().tutorialPage > 0)
 				{
-					Yui::tutorialPage--;
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::setTutorial();
+					Yui::getInstance().tutorialPage--;
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().setTutorial();
 				}
 			}
 		),
@@ -2537,18 +2542,18 @@ void Yui::setTutorial()
 			glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 			[]()
 			{
-				if (Yui::tutorialPage < 5) // total tutorial pages
+				if (Yui::getInstance().tutorialPage < 5) // total tutorial pages
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				}
 			},
 			[]()
 			{
-				if (Yui::tutorialPage < 5)
+				if (Yui::getInstance().tutorialPage < 5)
 				{
-					Yui::tutorialPage++;
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::setTutorial();
+					Yui::getInstance().tutorialPage++;
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().setTutorial();
 				}
 			}
 		),
@@ -2564,21 +2569,21 @@ void Yui::setTutorial()
 		)
 	);
 
-	if (Yui::tutorialPage == 0)
+	if (Yui::getInstance().tutorialPage == 0)
 	{
 		ui2b(3)->bgColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
 		ui2b(3)->hoverColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
 	}
-	else if (Yui::tutorialPage == 5)
+	else if (Yui::getInstance().tutorialPage == 5)
 	{
 		ui2b(4)->bgColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
 		ui2b(4)->hoverColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
 	}
 
-	switch (Yui::tutorialPage)
+	switch (Yui::getInstance().tutorialPage)
 	{
 	case 0:
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			2,
 			new Image(PATH_PREFIX.append("images\\tutorial\\home.png").c_str(), false, 0.5f, 0.5725f, 0.5f, 0.5f),
@@ -2590,7 +2595,7 @@ void Yui::setTutorial()
 		break;
 
 	case 1:
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			3,
 			new Image(PATH_PREFIX.append("images\\tutorial\\play.png").c_str(), false, 0.5f, 0.5725f, 0.5f, 0.5f),
@@ -2601,7 +2606,7 @@ void Yui::setTutorial()
 		break;
 
 	case 2:
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			3,
 			new Image(PATH_PREFIX.append("images\\tutorial\\results.png").c_str(), false, 0.5f, 0.5725f, 0.5f, 0.5f),
@@ -2612,7 +2617,7 @@ void Yui::setTutorial()
 		break;
 
 	case 3:
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			3,
 			new Image(PATH_PREFIX.append("images\\tutorial\\settings.png").c_str(), false, 0.5f, 0.5725f, 0.5f, 0.5f),
@@ -2623,22 +2628,22 @@ void Yui::setTutorial()
 		break;
 
 	case 4:
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			3,
 			new Image(PATH_PREFIX.append("images\\tutorial\\history.png").c_str(), false, 0.5f, 0.5725f, 0.5f, 0.5f),
 			new Text("in history, you cAn see All of your previous stAndArd gAMes. grAy gAMes Are iMported gAMes", 0.5f, 0.204375f, 0.2125f, 0.3f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)),
-			new Text("click the export button to copy the MApcode (more on the next slide)", 0.5f, 0.068125f, 0.275f, 0.3f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f))
+			new Text("click the export button to copy the MApcode (More on the next slide)", 0.5f, 0.068125f, 0.275f, 0.3f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f))
 		);
 
 		break;
 
 	case 5:
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			3,
 			new Image(PATH_PREFIX.append("images\\tutorial\\import.png").c_str(), false, 0.5f, 0.5725f, 0.5f, 0.5f),
-			new Text("here, you cAN pAste your clipboArd (the MApcode) And plAy Any gAme AgAin!", 0.5f, 0.204375f, 0.25f, 0.3f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)),
+			new Text("here, you cAN pAste your clipboArd (the MApcode) And plAy Any gAMe AgAin!", 0.5f, 0.204375f, 0.25f, 0.3f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)),
 			new Text("with this, you cAn send MApcodes to friends And see how they do!", 0.5f, 0.068125f, 0.3f, 0.3f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f))
 		);
 
@@ -2657,8 +2662,8 @@ void Yui::setTutorial()
 void Yui::setHistory()
 {
 	// need purge and element add in this method due to page scrolling needing to purge element list each click, hence needing to re-add the standard elements as well
-	Yui::purgeElements();
-	Yui::addElements
+	Yui::getInstance().purgeElements();
+	Yui::getInstance().addElements
 	(
 		6,
 		new Button
@@ -2685,12 +2690,12 @@ void Yui::setHistory()
 			glm::vec4(1.0f, 0.984f, 0.961f, 0.04f),
 			[]()
 			{
-				Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+				Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 			},
 			[]()
 			{
-				Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-				Yui::loadScene(0);
+				Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+				Yui::getInstance().loadScene(0);
 			}
 		),
 		new ValoButton
@@ -2719,18 +2724,18 @@ void Yui::setHistory()
 			glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 			[]()
 			{
-				if (Yui::historyPage > 1)
+				if (Yui::getInstance().historyPage > 1)
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				}
 			},
 			[]()
 			{
-				if (Yui::historyPage > 1)
+				if (Yui::getInstance().historyPage > 1)
 				{
-					Yui::historyPage--;
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::setHistory();
+					Yui::getInstance().historyPage--;
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().setHistory();
 				}
 			}
 		),
@@ -2767,9 +2772,9 @@ void Yui::setHistory()
 				if (GM::config.games.size() % 4 != 0)
 					pageCount++;
 
-				if (Yui::historyPage < pageCount)
+				if (Yui::getInstance().historyPage < pageCount)
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				}
 			},
 			[]()
@@ -2781,11 +2786,11 @@ void Yui::setHistory()
 				if (!pageCount)
 					pageCount = 1;
 
-				if (Yui::historyPage < pageCount)
+				if (Yui::getInstance().historyPage < pageCount)
 				{
-					Yui::historyPage++;
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
-					Yui::setHistory();
+					Yui::getInstance().historyPage++;
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
+					Yui::getInstance().setHistory();
 				}
 			}
 		)
@@ -2798,9 +2803,9 @@ void Yui::setHistory()
 	if (!pageCount)
 		pageCount = 1;
 	
-	ui2b(4)->text->changeText(std::format("PAge: {}/{}", Yui::historyPage, pageCount));
+	ui2b(4)->text->changeText(std::format("PAge: {}/{}", Yui::getInstance().historyPage, pageCount));
 
-	if (Yui::historyPage <= 1)
+	if (Yui::getInstance().historyPage <= 1)
 	{
 		ui2b(3)->bgColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
 		ui2b(3)->hoverColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
@@ -2811,7 +2816,7 @@ void Yui::setHistory()
 		ui2b(3)->hoverColor = glm::vec4(0.871f, 0.281f, 0.332f, 1.0f);
 	}
 
-	if (Yui::historyPage >= pageCount)
+	if (Yui::getInstance().historyPage >= pageCount)
 	{
 		ui2b(5)->bgColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
 		ui2b(5)->hoverColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
@@ -2824,7 +2829,7 @@ void Yui::setHistory()
 
 	if (!GM::config.games.size())
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			2,
 			new Text("No gAMes recorded", 0.5f, 0.61f, 0.5f, 0.5f, glm::vec4(1.0f, 0.984f, 0.961f, 1.0f)),
@@ -2834,9 +2839,9 @@ void Yui::setHistory()
 		return;
 	}
 
-	for (size_t i = 0; i < ((Yui::historyPage == pageCount) ? (((GM::config.games.size() - 1) % 4) + 1) : 4); i++)
+	for (size_t i = 0; i < ((Yui::getInstance().historyPage == pageCount) ? (((GM::config.games.size() - 1) % 4) + 1) : 4); i++)
 	{
-		Yui::addElements
+		Yui::getInstance().addElements
 		(
 			2,
 			new Text
@@ -2862,18 +2867,18 @@ void Yui::setHistory()
 				glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 				},
 				[]()
 				{
-					Yui::soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
+					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
 					// determines which button has been pressed to export
-					for (size_t i = 0; i < (Yui::UIElements.size() - 6) / 2; i++)
+					for (size_t i = 0; i < (Yui::getInstance().UIElements.size() - 6) / 2; i++)
 					{
 						if (ui2b(7 + (i * 2))->hovering)
 						{
-							Yui::exportGame((unsigned)i);
+							Yui::getInstance().exportGame((unsigned)i);
 
 							ui2b(7 + (i * 2))->text->changeText("Copied!");
 							ui2b(7 + (i * 2))->update();
@@ -2883,7 +2888,7 @@ void Yui::setHistory()
 				[]()
 				{
 					// resets all buttons to say "Export"
-					for (size_t i = 0; i < (Yui::UIElements.size() - 6) / 2; i++)
+					for (size_t i = 0; i < (Yui::getInstance().UIElements.size() - 6) / 2; i++)
 					{
 						ui2b(7 + (i * 2))->text->changeText("Export");
 						ui2b(7 + (i * 2))->update();
@@ -2893,13 +2898,13 @@ void Yui::setHistory()
 			)
 		);
 
-		if (GM::config.games[((Yui::historyPage - 1) * 4) + i].gameType == GameType::IMPORT)
+		if (GM::config.games[((Yui::getInstance().historyPage - 1) * 4) + i].gameType == GameType::IMPORT)
 			ui2t(6 + 2 * i)->textColor = glm::vec4(0.433f, 0.433f, 0.433f, 1.0f);
 
 		tm lt;
-		localtime_s(&lt, &GM::config.games[((Yui::historyPage - 1) * 4) + i].time);
+		localtime_s(&lt, &GM::config.games[((Yui::getInstance().historyPage - 1) * 4) + i].time);
 
-		ui2t(6 + (2 * i))->changeText(std::format("{}/{}/{} {}:{}{}\tPoints: {}", 1 + lt.tm_mon, lt.tm_mday, 1900 + lt.tm_year, lt.tm_hour, (lt.tm_min < 10) ? "0" : "", lt.tm_min, GM::config.games[Yui::historyPage * i].sumOfRounds()));
+		ui2t(6 + (2 * i))->changeText(std::format("{}/{}/{} {}:{}{}\tPoints: {}", 1 + lt.tm_mon, lt.tm_mday, 1900 + lt.tm_year, lt.tm_hour, (lt.tm_min < 10) ? "0" : "", lt.tm_min, GM::config.games[Yui::getInstance().historyPage * i].sumOfRounds()));
 	}
 
 	Yui::updateAll();
@@ -2907,52 +2912,52 @@ void Yui::setHistory()
 
 void Yui::setMarker()
 {
-	if (Yui::marker)
-		Yui::removeElement(Yui::marker);
+	if (Yui::getInstance().marker)
+		Yui::removeElement(Yui::getInstance().marker);
 
 	float markerAbsX = (float)(GM::mouseX / (float)*UIElement::WINDOWWIDTH);
 	float markerAbsY = (float)(*UIElement::WINDOWHEIGHT - GM::mouseY) / (float)*UIElement::WINDOWHEIGHT;
 
-	if (Yui::minimapScaled)
+	if (Yui::getInstance().minimapScaled)
 	{
-		Yui::markerRelX = (markerAbsX - (1.0f - scaledMinimapWidth)) / scaledMinimapWidth;
-		Yui::markerRelY = markerAbsY / scaledMinimapHeight;
+		Yui::getInstance().markerRelX = (markerAbsX - (1.0f - scaledMinimapWidth)) / scaledMinimapWidth;
+		Yui::getInstance().markerRelY = markerAbsY / scaledMinimapHeight;
 	}
 	else
 	{
-		Yui::markerRelX = (markerAbsX - (1.0f - unscaledMinimapWidth)) / unscaledMinimapWidth;
-		Yui::markerRelY = markerAbsY / unscaledMinimapHeight;
+		Yui::getInstance().markerRelX = (markerAbsX - (1.0f - unscaledMinimapWidth)) / unscaledMinimapWidth;
+		Yui::getInstance().markerRelY = markerAbsY / unscaledMinimapHeight;
 	}
 
 #ifdef _DEBUG
 	std::cout << "relative marker: (" << markerRelX << "f, " << markerRelY << "f)" << std::endl;
 #endif
 
-	Yui::marker = new Image(PATH_PREFIX.append("images\\textures\\marker.png").c_str(), true, markerAbsX, markerAbsY, scaledMarkerWidth, scaledMarkerHeight);
-	Yui::addElement(Yui::marker);
+	Yui::getInstance().marker = new Image(PATH_PREFIX.append("images\\textures\\marker.png").c_str(), true, markerAbsX, markerAbsY, scaledMarkerWidth, scaledMarkerHeight);
+	Yui::getInstance().addElement(Yui::getInstance().marker);
 }
 
 void Yui::updateMarker()
 {
-	if (!Yui::marker)
+	if (!Yui::getInstance().marker)
 		return;
 
-	if (Yui::minimapScaled)
+	if (Yui::getInstance().minimapScaled)
 	{
-		Yui::marker->centerX = (1.0f - scaledMinimapWidth) + (Yui::markerRelX * scaledMinimapWidth);
-		Yui::marker->centerY = Yui::markerRelY * scaledMinimapHeight;
-		Yui::marker->width = scaledMarkerWidth;
-		Yui::marker->height = scaledMarkerHeight;
+		Yui::getInstance().marker->centerX = (1.0f - scaledMinimapWidth) + (Yui::getInstance().markerRelX * scaledMinimapWidth);
+		Yui::getInstance().marker->centerY = Yui::getInstance().markerRelY * scaledMinimapHeight;
+		Yui::getInstance().marker->width = scaledMarkerWidth;
+		Yui::getInstance().marker->height = scaledMarkerHeight;
 	}
 	else
 	{
-		Yui::marker->centerX = (1.0f - unscaledMinimapWidth) + (Yui::markerRelX * unscaledMinimapWidth);
-		Yui::marker->centerY = Yui::markerRelY * unscaledMinimapHeight;
-		Yui::marker->width = unscaledMarkerWidth;
-		Yui::marker->height = unscaledMarkerHeight;
+		Yui::getInstance().marker->centerX = (1.0f - unscaledMinimapWidth) + (Yui::getInstance().markerRelX * unscaledMinimapWidth);
+		Yui::getInstance().marker->centerY = Yui::getInstance().markerRelY * unscaledMinimapHeight;
+		Yui::getInstance().marker->width = unscaledMarkerWidth;
+		Yui::getInstance().marker->height = unscaledMarkerHeight;
 	}
 
-	Yui::marker->update();
+	Yui::getInstance().marker->update();
 }
 
 std::string Yui::clipboardText()
@@ -2984,7 +2989,7 @@ std::string Yui::clipboardText()
 
 void Yui::exportGame(unsigned gameIndex)
 {
- 	int correctIndex = (4 * (Yui::historyPage - 1)) + gameIndex;
+ 	int correctIndex = (4 * (Yui::getInstance().historyPage - 1)) + gameIndex;
 
 #ifdef _DEBUG
 	std::cout << "gameIndex is " << gameIndex << ", correct index is " << correctIndex << std::endl;

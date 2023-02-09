@@ -300,7 +300,7 @@ void GM::newGame()
 		std::cout << "there are not 5 valid filtered maps. not good." << std::endl;
 #endif
 
-		return Yui::loadScene(100);
+		return Yui::getInstance().loadScene(100);
 	}
 
 	std::vector<Map> reservedMaps;
@@ -341,7 +341,7 @@ void GM::newFreeplay()
 		std::cout << "there are not any filtered maps for freeplay. not good." << std::endl;
 #endif
 
-		return Yui::loadScene(100);
+		return Yui::getInstance().loadScene(100);
 	}
 
 	std::vector<Map> randomizedMaps;
@@ -401,7 +401,7 @@ void GM::newImport(std::string importString)
 
 bool GM::validateImportString()
 {
-	std::string clipboardText = Yui::clipboardText();
+	std::string clipboardText = Yui::getInstance().clipboardText();
 
 	if (clipboardText.size() > 21)
 	{
@@ -437,7 +437,7 @@ void GM::stopGame(bool save)
 
 void GM::nextRound()
 {
-	GM::gameSlot->nextRound(glm::vec2(Yui::markerRelX, Yui::markerRelY));
+	GM::gameSlot->nextRound(glm::vec2(Yui::getInstance().markerRelX, Yui::getInstance().markerRelY));
 }
 
 void GM::calcStats()
