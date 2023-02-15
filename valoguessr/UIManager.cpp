@@ -27,6 +27,55 @@
 * scale down markers, make them look better														Y
 */
 
+Yui::Yui()
+	: soundEngine(irrklang::createIrrKlangDevice())
+	, menuBGM(nullptr)
+	, scene(0)
+	, historyPage(1)
+	, exportCount(0)
+	, tutorialPage(0)
+	, toClose(false)
+	, playable(true)
+	, minimapScaled(false)
+	, marker(nullptr)
+	, markerRelX(0.0)
+	, markerRelY(0.0)
+{
+	::srand((unsigned)::time(0));
+}
+
+Yui::~Yui()
+{
+	Yui::getInstance().purgeElements();
+
+	Yui::getInstance().soundEngine->stopAllSounds();
+	Yui::getInstance().soundEngine->drop();
+
+	Text::cleanup();
+	CheckBox::cleanup();
+
+	Image::cleanup();
+	Button::cleanup();
+}
+
+void Yui::init(const char* fontName, float* ratioW, float* ratioH, unsigned pixelHeight)
+{
+	UIElement::projection = glm::ortho(0.0f, (float)*UIElement::WINDOWWIDTH, 0.0f, (float)*UIElement::WINDOWHEIGHT);
+	ScrollText::scrollSpeed = 10.0f;
+
+	Text::init(fontName, ratioW, ratioH, pixelHeight);
+	Image::init();
+	Button::init();
+	CheckBox::init();
+
+	Yui::getInstance().soundEngine = irrklang::createIrrKlangDevice();
+	Yui::getInstance().soundEngine->setSoundVolume(1.0f);
+
+	Yui::menuBGM = Yui::getInstance().soundEngine->addSoundSourceFromFile(PATH_PREFIX.append("audio\\valomenu.mp3").c_str());
+
+	Yui::getInstance().UIElements.reserve(25);
+}
+
 Yui& Yui::getInstance()
 {
 	static Yui instance;
@@ -97,56 +146,6 @@ void Yui::renderAll()
 {
 	for (UIElement* element : Yui::getInstance().UIElements)
 		element->render();
-}
-
-Yui::Yui()
-	: soundEngine(irrklang::createIrrKlangDevice())
-	, menuBGM(nullptr)
-	, scene(0)
-	, historyPage(1)
-	, exportCount(0)
-	, tutorialPage(0)
-	, toClose(false)
-	, playable(true)
-	, minimapScaled(false)
-	, marker(nullptr)
-	, markerRelX(0.0)
-	, markerRelY(0.0)
-{
-	::srand((unsigned)::time(0));
-}
-
-void Yui::init(const char* fontName, float* ratioW, float* ratioH, unsigned pixelHeight)
-{
-	UIElement::projection = glm::ortho(0.0f, (float)*UIElement::WINDOWWIDTH, 0.0f, (float)*UIElement::WINDOWHEIGHT);
-	ScrollText::scrollSpeed = 10.0f;
-
-	GM::getInstance().init();
-	Text::init(fontName, ratioW, ratioH, pixelHeight);
-	Image::init();
-	Button::init();
-	CheckBox::init();
-
-	Yui::getInstance().soundEngine = irrklang::createIrrKlangDevice();
-	Yui::getInstance().soundEngine->setSoundVolume(1.0f);
-
-	Yui::menuBGM = Yui::getInstance().soundEngine->addSoundSourceFromFile(PATH_PREFIX.append("audio\\valomenu.mp3").c_str());
-
-	Yui::getInstance().UIElements.reserve(25);
-}
-
-Yui::~Yui()
-{
-	Yui::getInstance().purgeElements();
-
-	Yui::getInstance().soundEngine->stopAllSounds();
-	Yui::getInstance().soundEngine->drop();
-
-	Text::cleanup();
-	CheckBox::cleanup();
-
-	Image::cleanup();
-	Button::cleanup();
 }
 
 /*

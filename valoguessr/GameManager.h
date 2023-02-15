@@ -11,6 +11,7 @@
 class GM
 {
 public:
+	// singleton methods
 	GM();
 	~GM();
 	static GM& getInstance();
@@ -61,9 +62,4 @@ public:
 
 	// calculates achievements (excluding "Play Freeplay") based on game history and updates config
 	void calcAchievements();
-
-	// reserves memory in vectors for performance
-	void init();
-	void cleanup();
 };
-

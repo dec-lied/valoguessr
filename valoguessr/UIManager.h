@@ -41,8 +41,8 @@ public:
 	// singleton methods
 	Yui();
 	~Yui();
-	static Yui& getInstance();
 	void init(const char* fontName, float* ratioW, float* ratioH, unsigned pixelHeight);
+	static Yui& getInstance();
 
 	// UIElements vector
 	std::vector<UIElement*> UIElements;

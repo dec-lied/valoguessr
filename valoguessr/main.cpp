@@ -125,7 +125,6 @@ int main()
 	UIElement::WINDOWWIDTH = &WINDOWWIDTH;
 	UIElement::WINDOWHEIGHT = &WINDOWHEIGHT;
 
-	GM::getInstance().init();
 #ifdef _DEBUG
 	Yui::getInstance().init(".\\fonts\\valorant.ttf", &ratioW, &ratioH, 130);
 #else
@@ -151,11 +150,6 @@ int main()
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
-	/*
-		Cleanup
-	*/
-	GM::getInstance().cleanup();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
