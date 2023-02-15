@@ -125,7 +125,7 @@ int main()
 	UIElement::WINDOWWIDTH = &WINDOWWIDTH;
 	UIElement::WINDOWHEIGHT = &WINDOWHEIGHT;
 
-	GM::init();
+	GM::getInstance().init();
 #ifdef _DEBUG
 	Yui::getInstance().init(".\\fonts\\valorant.ttf", &ratioW, &ratioH, 130);
 #else
@@ -155,7 +155,7 @@ int main()
 	/*
 		Cleanup
 	*/
-	GM::cleanup();
+	GM::getInstance().cleanup();
 
 	glfwDestroyWindow(window);
 	glfwTerminate();
@@ -166,7 +166,7 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || Yui::getInstance().toClose)
 		glfwSetWindowShouldClose(window, true);
 
-	glfwGetCursorPos(window, &GM::mouseX, &GM::mouseY);
+	glfwGetCursorPos(window, &GM::getInstance().mouseX, &GM::getInstance().mouseY);
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
@@ -186,7 +186,7 @@ void processInput(GLFWwindow* window)
 	for (UIElement* element : Yui::getInstance().UIElements)
 	{
 		Button* bp = dynamic_cast<Button*>(element);
-		if (bp && bp->isHovering((float)GM::mouseX, (float)GM::mouseY))
+		if (bp && bp->isHovering((float)GM::getInstance().mouseX, (float)GM::getInstance().mouseY))
 		{
 			if (clicking && Yui::getInstance().playable)
 			{

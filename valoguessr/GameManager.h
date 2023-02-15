@@ -11,55 +11,59 @@
 class GM
 {
 public:
+	GM();
+	~GM();
+	static GM& getInstance();
+
 	// game slot: current and only pointer to game object
-	static Game* gameSlot;
+	Game* gameSlot;
 
 	// config member
-	static Config config;
+	Config config;
 
 	// constantly tracks mouse x and y pos
-	static double mouseX, mouseY;
+	double mouseX, mouseY;
 
 	// original points for imported game
-	static uint32_t importedPoints;
+	uint32_t importedPoints;
 
 	// all available maps to choose from
-	static Map allMaps[3][6 * 8];
+	Map allMaps[3][6 * 8];
 
 	// current pool of maps according to difficulty & map choice
-	static std::vector<Map> filteredMaps;
+	std::vector<Map> filteredMaps;
 
 	// vector to not allow duplicate maps per game
-	static std::vector<uint8_t> usedMaps;
+	std::vector<uint8_t> usedMaps;
 
-	// filters maps based on settings and puts in GM::filterMaps
-	static void filterMaps();
+	// filters maps based on settings and puts in GM::getInstance().filterMaps
+	void filterMaps();
 
 	// returns the index of a map relative to the diffivulty based on its name
-	static size_t mapIDOf(unsigned difficulty, const char* mapPath);
+	size_t mapIDOf(unsigned difficulty, const char* mapPath);
 
 	// returns true if current clipboard follows game import regex
-	static bool validateImportString();
+	bool validateImportString();
 
-	// creates a game instance in GM::gameSlot
-	static void newGame();
-	static void newFreeplay();
-	static void newImport(std::string importString);
+	// creates a game instance in GM::getInstance().gameSlot
+	void newGame();
+	void newFreeplay();
+	void newImport(std::string importString);
 
-	// updates GM::gameSlot to proceed to next round
-	static void nextRound();
+	// updates GM::getInstance().gameSlot to proceed to next round
+	void nextRound();
 
-	// deletes game instance in GM::gameSlot. if save then write to game history (STANDARD AND IMPORT ONLY)
-	static void stopGame(bool save);
+	// deletes game instance in GM::getInstance().gameSlot. if save then write to game history (STANDARD AND IMPORT ONLY)
+	void stopGame(bool save);
 
 	// calculates stats based on game history and updates config
-	static void calcStats();
+	void calcStats();
 
 	// calculates achievements (excluding "Play Freeplay") based on game history and updates config
-	static void calcAchievements();
+	void calcAchievements();
 
 	// reserves memory in vectors for performance
-	static void init();
-	static void cleanup();
+	void init();
+	void cleanup();
 };
 

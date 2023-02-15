@@ -121,7 +121,7 @@ void Yui::init(const char* fontName, float* ratioW, float* ratioH, unsigned pixe
 	UIElement::projection = glm::ortho(0.0f, (float)*UIElement::WINDOWWIDTH, 0.0f, (float)*UIElement::WINDOWHEIGHT);
 	ScrollText::scrollSpeed = 10.0f;
 
-	GM::init();
+	GM::getInstance().init();
 	Text::init(fontName, ratioW, ratioH, pixelHeight);
 	Image::init();
 	Button::init();
@@ -476,7 +476,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
-					GM::config.resetSHA();
+					GM::getInstance().config.resetSHA();
 
 					Yui::getInstance().setStats();
 				},
@@ -578,7 +578,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					GM::config.difficulty = 1;
+					GM::getInstance().config.difficulty = 1;
 					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
@@ -602,7 +602,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					GM::config.difficulty = 2;
+					GM::getInstance().config.difficulty = 2;
 					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
@@ -626,7 +626,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					GM::config.difficulty = 3;
+					GM::getInstance().config.difficulty = 3;
 					Yui::getInstance().setSettingsButtons();
 				},
 				[]()
@@ -651,13 +651,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[0])
+					if (GM::getInstance().config.mapChoice[0])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 1)
-							GM::config.mapChoice[0] = !GM::config.mapChoice[0];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 1)
+							GM::getInstance().config.mapChoice[0] = !GM::getInstance().config.mapChoice[0];
 					}
 					else
-						GM::config.mapChoice[0] = !GM::config.mapChoice[0];
+						GM::getInstance().config.mapChoice[0] = !GM::getInstance().config.mapChoice[0];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -682,13 +682,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[1])
+					if (GM::getInstance().config.mapChoice[1])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 2)
-							GM::config.mapChoice[1] = !GM::config.mapChoice[1];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 2)
+							GM::getInstance().config.mapChoice[1] = !GM::getInstance().config.mapChoice[1];
 					}
 					else
-						GM::config.mapChoice[1] = !GM::config.mapChoice[1];
+						GM::getInstance().config.mapChoice[1] = !GM::getInstance().config.mapChoice[1];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -713,13 +713,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[2])
+					if (GM::getInstance().config.mapChoice[2])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 4)
-							GM::config.mapChoice[2] = !GM::config.mapChoice[2];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 4)
+							GM::getInstance().config.mapChoice[2] = !GM::getInstance().config.mapChoice[2];
 					}
 					else
-						GM::config.mapChoice[2] = !GM::config.mapChoice[2];
+						GM::getInstance().config.mapChoice[2] = !GM::getInstance().config.mapChoice[2];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -744,13 +744,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[3])
+					if (GM::getInstance().config.mapChoice[3])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 8)
-							GM::config.mapChoice[3] = !GM::config.mapChoice[3];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 8)
+							GM::getInstance().config.mapChoice[3] = !GM::getInstance().config.mapChoice[3];
 					}
 					else
-						GM::config.mapChoice[3] = !GM::config.mapChoice[3];
+						GM::getInstance().config.mapChoice[3] = !GM::getInstance().config.mapChoice[3];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -775,13 +775,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[4])
+					if (GM::getInstance().config.mapChoice[4])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 16)
-							GM::config.mapChoice[4] = !GM::config.mapChoice[4];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 16)
+							GM::getInstance().config.mapChoice[4] = !GM::getInstance().config.mapChoice[4];
 					}
 					else
-						GM::config.mapChoice[4] = !GM::config.mapChoice[4];
+						GM::getInstance().config.mapChoice[4] = !GM::getInstance().config.mapChoice[4];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -806,13 +806,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[5])
+					if (GM::getInstance().config.mapChoice[5])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 32)
-							GM::config.mapChoice[5] = !GM::config.mapChoice[5];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 32)
+							GM::getInstance().config.mapChoice[5] = !GM::getInstance().config.mapChoice[5];
 					}
 					else
-						GM::config.mapChoice[5] = !GM::config.mapChoice[5];
+						GM::getInstance().config.mapChoice[5] = !GM::getInstance().config.mapChoice[5];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -837,13 +837,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[6])
+					if (GM::getInstance().config.mapChoice[6])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 64)
-							GM::config.mapChoice[6] = !GM::config.mapChoice[6];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 64)
+							GM::getInstance().config.mapChoice[6] = !GM::getInstance().config.mapChoice[6];
 					}
 					else
-						GM::config.mapChoice[6] = !GM::config.mapChoice[6];
+						GM::getInstance().config.mapChoice[6] = !GM::getInstance().config.mapChoice[6];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -868,13 +868,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valohover.mp3").c_str());
 
-					if (GM::config.mapChoice[7])
+					if (GM::getInstance().config.mapChoice[7])
 					{
-						if ((unsigned)GM::config.mapChoice.to_ulong() > 128)
-							GM::config.mapChoice[7] = !GM::config.mapChoice[7];
+						if ((unsigned)GM::getInstance().config.mapChoice.to_ulong() > 128)
+							GM::getInstance().config.mapChoice[7] = !GM::getInstance().config.mapChoice[7];
 					}
 					else
-						GM::config.mapChoice[7] = !GM::config.mapChoice[7];
+						GM::getInstance().config.mapChoice[7] = !GM::getInstance().config.mapChoice[7];
 
 					Yui::getInstance().setSettingsButtons();
 				},
@@ -899,7 +899,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
-					GM::config.resetSettings();
+					GM::getInstance().config.resetSettings();
 
 					Yui::getInstance().setSettingsButtons();
 				}
@@ -977,13 +977,13 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
 
-					GM::newGame();
+					GM::getInstance().newGame();
 
-					if (GM::filteredMaps.size() >= 5)
+					if (GM::getInstance().filteredMaps.size() >= 5)
 						Yui::getInstance().loadScene(6);
 					else
 					{
-						GM::stopGame(false);
+						GM::getInstance().stopGame(false);
 						Yui::getInstance().loadScene(100);
 					}
 				}
@@ -997,15 +997,15 @@ void Yui::loadScene(unsigned sceneID)
 				[]()
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
-					GM::config.achievements[0] = 0b1;
+					GM::getInstance().config.achievements[0] = 0b1;
 
-					GM::newFreeplay();
+					GM::getInstance().newFreeplay();
 
-					if (GM::filteredMaps.size() >= 5)
+					if (GM::getInstance().filteredMaps.size() >= 5)
 						Yui::getInstance().loadScene(6);
 					else
 					{
-						GM::stopGame(false);
+						GM::getInstance().stopGame(false);
 						Yui::getInstance().loadScene(100);
 					}
 				}
@@ -1045,15 +1045,15 @@ void Yui::loadScene(unsigned sceneID)
 	case 6: // play scene
 	{
 		std::string diffPath = PATH_PREFIX.append("images\\maps\\").c_str();
-		if (GM::config.difficulty == 1)
+		if (GM::getInstance().config.difficulty == 1)
 			diffPath += "easy\\";
-		else if (GM::config.difficulty == 2)
+		else if (GM::getInstance().config.difficulty == 2)
 			diffPath += "medium\\";
 		else
 			diffPath += "hard\\";
 
 		std::string minimapPath = PATH_PREFIX.append("images\\minimaps\\").c_str();
-		switch (GM::gameSlot->getCurrentRound().map.mapType)
+		switch (GM::getInstance().gameSlot->getCurrentRound().map.mapType)
 		{
 			case MapEnum::ASCENT:
 				minimapPath += "ascentMap.png";
@@ -1096,7 +1096,7 @@ void Yui::loadScene(unsigned sceneID)
 		Yui::getInstance().addElements
 		(
 			4,
-			new Image(diffPath + std::string(GM::gameSlot->getCurrentRound().map.mapPath), false, 0.5f, 0.5f, 1.0, 1.0f),
+			new Image(diffPath + std::string(GM::getInstance().gameSlot->getCurrentRound().map.mapPath), false, 0.5f, 0.5f, 1.0, 1.0f),
 			new Button
 			(
 				new Text("PlAy", 0.5f, 0.9625f, 0.3f, 0.3f, glm::vec4(1.0f, 0.984f, 0.961f, 0.65f)),
@@ -1181,11 +1181,11 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclick.mp3").c_str());
 
-					GM::gameSlot->nextRound(glm::vec2(Yui::getInstance().markerRelX, Yui::getInstance().markerRelY));
+					GM::getInstance().gameSlot->nextRound(glm::vec2(Yui::getInstance().markerRelX, Yui::getInstance().markerRelY));
 
-					if (GM::gameSlot->gameType == GameType::STANDARD || GM::gameSlot->gameType == GameType::IMPORT)
+					if (GM::getInstance().gameSlot->gameType == GameType::STANDARD || GM::getInstance().gameSlot->gameType == GameType::IMPORT)
 						Yui::getInstance().loadScene(7);
-					else if (GM::gameSlot->gameType == GameType::FREEPLAY)
+					else if (GM::getInstance().gameSlot->gameType == GameType::FREEPLAY)
 						Yui::getInstance().loadScene(9);
 				}
 			)
@@ -1199,7 +1199,7 @@ void Yui::loadScene(unsigned sceneID)
 	case 7: // round result scene
 	{
 		std::string minimapPath = PATH_PREFIX.append("images\\minimaps\\").c_str();
-		switch (GM::gameSlot->rounds[GM::gameSlot->roundIndex - 1].map.mapType)
+		switch (GM::getInstance().gameSlot->rounds[GM::getInstance().gameSlot->roundIndex - 1].map.mapType)
 		{
 		case MapEnum::ASCENT:
 			minimapPath += "ascentMap.png";
@@ -1267,7 +1267,7 @@ void Yui::loadScene(unsigned sceneID)
 			),
 			new Text
 			(
-				std::to_string(GM::gameSlot->rounds[GM::gameSlot->roundIndex - 1].points) + " / 5000", 
+				std::to_string(GM::getInstance().gameSlot->rounds[GM::getInstance().gameSlot->roundIndex - 1].points) + " / 5000", 
 				0.75f,
 				0.5f,
 				0.5f,
@@ -1287,7 +1287,7 @@ void Yui::loadScene(unsigned sceneID)
 			(
 				new Text
 				(
-					(GM::gameSlot->roundIndex < 5) ? "Next round" : "Finish Game",
+					(GM::getInstance().gameSlot->roundIndex < 5) ? "Next round" : "Finish Game",
 					0.75f,
 					0.1f,
 					0.4f,
@@ -1314,7 +1314,7 @@ void Yui::loadScene(unsigned sceneID)
 						Yui::getInstance().loadScene(6);
 					else
 					{
-						if (GM::gameSlot->gameType == GameType::STANDARD)
+						if (GM::getInstance().gameSlot->gameType == GameType::STANDARD)
 							Yui::getInstance().loadScene(8);
 						else
 							Yui::getInstance().loadScene(12);
@@ -1334,13 +1334,13 @@ void Yui::loadScene(unsigned sceneID)
 			(
 				glm::vec2
 				(
-					GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
-					GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f
 				),
 				glm::vec2
 				(
-					GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
-					GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f
 				),
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.4f), 
 				0.75f
@@ -1349,8 +1349,8 @@ void Yui::loadScene(unsigned sceneID)
 			(
 				PATH_PREFIX.append("images\\textures\\valomarker.png").c_str(),
 				true,
-				GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
-				GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f * 1.025f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f * 1.025f,
 				0.034f * 0.525f,
 				0.034f
 			),
@@ -1358,8 +1358,8 @@ void Yui::loadScene(unsigned sceneID)
 			(
 				PATH_PREFIX.append("images\\textures\\marker.png").c_str(),
 				true,
-				GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
-				GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f,
 				0.015f * 0.525f,
 				0.015f
 			)
@@ -1370,10 +1370,10 @@ void Yui::loadScene(unsigned sceneID)
 
 	case 8: // game results scene
 	{
-		for (size_t i = 0; i < GM::gameSlot->rounds.size(); i++)
+		for (size_t i = 0; i < GM::getInstance().gameSlot->rounds.size(); i++)
 		{
 			std::string minimapPath = PATH_PREFIX.append("images\\minimaps\\").c_str();
-			switch (GM::gameSlot->rounds[i].map.mapType)
+			switch (GM::getInstance().gameSlot->rounds[i].map.mapType)
 			{
 			case MapEnum::ASCENT:
 				minimapPath += "ascentMap.png";
@@ -1476,13 +1476,13 @@ void Yui::loadScene(unsigned sceneID)
 				(
 					glm::vec2
 					(
-						(GM::gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-						(GM::gameSlot->rounds[i].map.correctCoords[1] * nextH) + (nextY - (nextH * 0.5f))
+						(GM::getInstance().gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+						(GM::getInstance().gameSlot->rounds[i].map.correctCoords[1] * nextH) + (nextY - (nextH * 0.5f))
 					),						 
 					glm::vec2				 
 					(						 
-						(GM::gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-						(GM::gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f))
+						(GM::getInstance().gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+						(GM::getInstance().gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f))
 					),
 					glm::vec4(1.0f, 0.984f, 0.961f, roundRecapOpacity * 0.2f),
 					0.75f
@@ -1491,8 +1491,8 @@ void Yui::loadScene(unsigned sceneID)
 				(
 					PATH_PREFIX.append("images\\textures\\valomarker.png").c_str(),
 					true,
-					(GM::gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-					(GM::gameSlot->rounds[i].map.correctCoords[1] * nextH * 1.025f) + (nextY - (nextH * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].map.correctCoords[1] * nextH * 1.025f) + (nextY - (nextH * 0.5f)),
 					0.015f * 0.525f,
 					0.015f,
 					roundRecapOpacity * 2.0f
@@ -1501,8 +1501,8 @@ void Yui::loadScene(unsigned sceneID)
 				(
 					PATH_PREFIX.append("images\\textures\\marker.png").c_str(),
 					true,
-					(GM::gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-					(GM::gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f)),
 					0.015f * 0.525f,
 					0.015f,
 					roundRecapOpacity
@@ -1538,7 +1538,7 @@ void Yui::loadScene(unsigned sceneID)
 			),
 			new Text
 			(
-				std::to_string(GM::gameSlot->sumOfRounds()) + " / 25000",
+				std::to_string(GM::getInstance().gameSlot->sumOfRounds()) + " / 25000",
 				0.5f,
 				0.575f,
 				0.5f,
@@ -1573,14 +1573,14 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
-					GM::stopGame(true);
-					GM::newGame();
+					GM::getInstance().stopGame(true);
+					GM::getInstance().newGame();
 
-					if (GM::filteredMaps.size() >= 5)
+					if (GM::getInstance().filteredMaps.size() >= 5)
 						Yui::getInstance().loadScene(6);
 					else
 					{
-						GM::stopGame(false);
+						GM::getInstance().stopGame(false);
 						Yui::getInstance().loadScene(100);
 					}
 				}
@@ -1604,7 +1604,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
-					GM::stopGame(true);
+					GM::getInstance().stopGame(true);
 
 					Yui::getInstance().loadScene(0);
 				}
@@ -1617,7 +1617,7 @@ void Yui::loadScene(unsigned sceneID)
 	case 9: // freeplay round results
 	{
 		std::string minimapPath = PATH_PREFIX.append("images\\minimaps\\").c_str();
-		switch (GM::gameSlot->rounds[GM::gameSlot->roundIndex - 1].map.mapType)
+		switch (GM::getInstance().gameSlot->rounds[GM::getInstance().gameSlot->roundIndex - 1].map.mapType)
 		{
 		case MapEnum::ASCENT:
 			minimapPath += "ascentMap.png";
@@ -1685,7 +1685,7 @@ void Yui::loadScene(unsigned sceneID)
 			),
 			new Text
 			(
-				std::to_string(GM::gameSlot->rounds[Game::roundIndex - 1].points) + " / 5000",
+				std::to_string(GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].points) + " / 5000",
 				0.75f,
 				0.7f,
 				0.5f,
@@ -1703,7 +1703,7 @@ void Yui::loadScene(unsigned sceneID)
 			),
 			new Text
 			(
-				std::to_string(GM::gameSlot->sumOfRounds()) + " / " + std::to_string(5000 * Game::roundIndex),
+				std::to_string(GM::getInstance().gameSlot->sumOfRounds()) + " / " + std::to_string(5000 * Game::roundIndex),
 				0.75f,
 				0.35f,
 				0.5f,
@@ -1767,7 +1767,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
-					GM::stopGame(false);
+					GM::getInstance().stopGame(false);
 
 					Yui::getInstance().loadScene(0);
 				}
@@ -1785,13 +1785,13 @@ void Yui::loadScene(unsigned sceneID)
 			(
 				glm::vec2
 				(
-					GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
-					GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f
 				),
 				glm::vec2
 				(
-					GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
-					GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
+					GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f
 				),
 				glm::vec4(1.0f, 0.984f, 0.961f, 0.4f), 
 				0.75f
@@ -1800,8 +1800,8 @@ void Yui::loadScene(unsigned sceneID)
 			(
 				PATH_PREFIX.append("images\\textures\\valomarker.png").c_str(),
 				true,
-				GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
-				GM::gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f * 1.025f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[0] * 0.5f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].map.correctCoords[1] * 0.925f * 1.025f,
 				0.034f * 0.525f,
 				0.034f
 			),
@@ -1809,14 +1809,14 @@ void Yui::loadScene(unsigned sceneID)
 			(
 				PATH_PREFIX.append("images\\textures\\marker.png").c_str(),
 				true,
-				GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
-				GM::gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[0] * 0.5f,
+				GM::getInstance().gameSlot->rounds[Game::roundIndex - 1].guessCoords[1] * 0.925f,
 				0.015f * 0.525f,
 				0.015f
 			)
 		);
 
-		if (Game::roundIndex >= GM::gameSlot->rounds.size())
+		if (Game::roundIndex >= GM::getInstance().gameSlot->rounds.size())
 		{
 			ui2b(5)->visible = false;
 			
@@ -1979,9 +1979,9 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoplayclick.mp3").c_str());
 
-					if (GM::validateImportString())
+					if (GM::getInstance().validateImportString())
 					{
-						GM::newImport(ui2t(3)->text);
+						GM::getInstance().newImport(ui2t(3)->text);
 
 						Yui::getInstance().loadScene(6);
 					}
@@ -1999,10 +1999,10 @@ void Yui::loadScene(unsigned sceneID)
 
 	case 12: // import game results
 	{
-		for (size_t i = 0; i < GM::gameSlot->rounds.size(); i++)
+		for (size_t i = 0; i < GM::getInstance().gameSlot->rounds.size(); i++)
 		{
 			std::string minimapPath = PATH_PREFIX.append("images\\minimaps\\").c_str();
-			switch (GM::gameSlot->rounds[i].map.mapType)
+			switch (GM::getInstance().gameSlot->rounds[i].map.mapType)
 			{
 			case MapEnum::ASCENT:
 				minimapPath += "ascentMap.png";
@@ -2105,13 +2105,13 @@ void Yui::loadScene(unsigned sceneID)
 				(
 					glm::vec2
 					(
-						(GM::gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-						(GM::gameSlot->rounds[i].map.correctCoords[1] * nextH) + (nextY - (nextH * 0.5f))
+						(GM::getInstance().gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+						(GM::getInstance().gameSlot->rounds[i].map.correctCoords[1] * nextH) + (nextY - (nextH * 0.5f))
 					),
 					glm::vec2
 					(
-						(GM::gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-						(GM::gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f))
+						(GM::getInstance().gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+						(GM::getInstance().gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f))
 					),
 					glm::vec4(1.0f, 0.984f, 0.961f, roundRecapOpacity * 0.2f),
 					0.75f
@@ -2120,8 +2120,8 @@ void Yui::loadScene(unsigned sceneID)
 				(
 					PATH_PREFIX.append("images\\textures\\valomarker.png").c_str(),
 					true,
-					(GM::gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-					(GM::gameSlot->rounds[i].map.correctCoords[1] * nextH * 1.025f) + (nextY - (nextH * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].map.correctCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].map.correctCoords[1] * nextH * 1.025f) + (nextY - (nextH * 0.5f)),
 					0.015f * 0.525f,
 					0.015f,
 					roundRecapOpacity * 2.0f
@@ -2130,8 +2130,8 @@ void Yui::loadScene(unsigned sceneID)
 				(
 					PATH_PREFIX.append("images\\textures\\marker.png").c_str(),
 					true,
-					(GM::gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
-					(GM::gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].guessCoords[0] * nextW) + (nextX - (nextW * 0.5f)),
+					(GM::getInstance().gameSlot->rounds[i].guessCoords[1] * nextH) + (nextY - (nextH * 0.5f)),
 					0.015f * 0.525f,
 					0.015f,
 					roundRecapOpacity
@@ -2167,7 +2167,7 @@ void Yui::loadScene(unsigned sceneID)
 			),
 			new Text
 			(
-				std::to_string(GM::gameSlot->sumOfRounds()) + " / 25000",
+				std::to_string(GM::getInstance().gameSlot->sumOfRounds()) + " / 25000",
 				0.25f,
 				0.535f,
 				0.5f,
@@ -2203,7 +2203,7 @@ void Yui::loadScene(unsigned sceneID)
 			),
 			new Text
 			(
-				std::to_string(GM::importedPoints) + " / 25000",
+				std::to_string(GM::getInstance().importedPoints) + " / 25000",
 				0.75f,
 				0.535f,
 				0.5f,
@@ -2238,7 +2238,7 @@ void Yui::loadScene(unsigned sceneID)
 				{
 					Yui::getInstance().soundEngine->play2D(PATH_PREFIX.append("audio\\valoclicky.mp3").c_str());
 
-					GM::stopGame(true);
+					GM::getInstance().stopGame(true);
 
 					Yui::getInstance().loadScene(0);
 				}
@@ -2352,26 +2352,26 @@ void Yui::loadScene(unsigned sceneID)
 
 void Yui::setStats()
 {
-	GM::calcStats();
+	GM::getInstance().calcStats();
 
-	ui2t(4)->changeText(std::to_string(GM::config.playCount).c_str());
-	ui2t(6)->changeText(std::to_string((GM::config.playCount) ? GM::config.totalPoints / GM::config.playCount : 0).c_str());
-	ui2t(8)->changeText(std::to_string(GM::config.pointRecord).c_str());
-	ui2t(10)->changeText(std::to_string(GM::config.lowestPoints).c_str());
-	ui2t(12)->changeText(std::to_string(GM::config.Ls).c_str());
-	ui2t(14)->changeText(std::to_string(GM::config.Ws).c_str());
+	ui2t(4)->changeText(std::to_string(GM::getInstance().config.playCount).c_str());
+	ui2t(6)->changeText(std::to_string((GM::getInstance().config.playCount) ? GM::getInstance().config.totalPoints / GM::getInstance().config.playCount : 0).c_str());
+	ui2t(8)->changeText(std::to_string(GM::getInstance().config.pointRecord).c_str());
+	ui2t(10)->changeText(std::to_string(GM::getInstance().config.lowestPoints).c_str());
+	ui2t(12)->changeText(std::to_string(GM::getInstance().config.Ls).c_str());
+	ui2t(14)->changeText(std::to_string(GM::getInstance().config.Ws).c_str());
 
 	Yui::updateAll();
 }
 
 void Yui::setAchievements()
 {
-	GM::calcStats();
-	GM::calcAchievements();
+	GM::getInstance().calcStats();
+	GM::getInstance().calcAchievements();
 
 	for (size_t i = 0; i < 8; i++)
 	{
-		if (GM::config.achievements[i])
+		if (GM::getInstance().config.achievements[i])
 		{
 			ui2cb((2 * i) + 3)->setStatus(true);
 			ui2t(((2 * i) + 1) + 3)->textColor = glm::vec4(0.741f, 0.224f, 0.267f, 1.0f);
@@ -2395,7 +2395,7 @@ void Yui::setSettingsButtons()
 	ui2b(8)->bgColor = glm::vec4(0.533f, 0.533f, 0.533f, 1.0f);
 	ui2b(8)->hoverColor = glm::vec4(0.941f, 0.351f, 0.402f, 1.0f);
 
-	switch (GM::config.difficulty)
+	switch (GM::getInstance().config.difficulty)
 	{
 	case 1:
 		ui2b(6)->bgColor = glm::vec4(0.941f, 0.351f, 0.402f, 1.0f);
@@ -2418,7 +2418,7 @@ void Yui::setSettingsButtons()
 
 	for (int i = 0; i < 8; i++)
 	{
-		if (GM::config.mapChoice[i])
+		if (GM::getInstance().config.mapChoice[i])
 		{
 			if (ui2b(10 + i)->hovering) // artificial 
 			{
@@ -2768,8 +2768,8 @@ void Yui::setHistory()
 			glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
 			[]()
 			{
-				size_t pageCount = GM::config.games.size() / 4;
-				if (GM::config.games.size() % 4 != 0)
+				size_t pageCount = GM::getInstance().config.games.size() / 4;
+				if (GM::getInstance().config.games.size() % 4 != 0)
 					pageCount++;
 
 				if (Yui::getInstance().historyPage < pageCount)
@@ -2779,8 +2779,8 @@ void Yui::setHistory()
 			},
 			[]()
 			{
-				size_t pageCount = GM::config.games.size() / 4;
-				if (GM::config.games.size() % 4 != 0)
+				size_t pageCount = GM::getInstance().config.games.size() / 4;
+				if (GM::getInstance().config.games.size() % 4 != 0)
 					pageCount++;
 
 				if (!pageCount)
@@ -2796,8 +2796,8 @@ void Yui::setHistory()
 		)
 	);
 
-	size_t pageCount = GM::config.games.size() / 4;
-	if (GM::config.games.size() % 4 != 0)
+	size_t pageCount = GM::getInstance().config.games.size() / 4;
+	if (GM::getInstance().config.games.size() % 4 != 0)
 		pageCount++;
 
 	if (!pageCount)
@@ -2827,7 +2827,7 @@ void Yui::setHistory()
 		ui2b(5)->hoverColor = glm::vec4(0.871f, 0.281f, 0.332f, 1.0f);
 	}
 
-	if (!GM::config.games.size())
+	if (!GM::getInstance().config.games.size())
 	{
 		Yui::getInstance().addElements
 		(
@@ -2839,7 +2839,7 @@ void Yui::setHistory()
 		return;
 	}
 
-	for (size_t i = 0; i < ((Yui::getInstance().historyPage == pageCount) ? (((GM::config.games.size() - 1) % 4) + 1) : 4); i++)
+	for (size_t i = 0; i < ((Yui::getInstance().historyPage == pageCount) ? (((GM::getInstance().config.games.size() - 1) % 4) + 1) : 4); i++)
 	{
 		Yui::getInstance().addElements
 		(
@@ -2898,13 +2898,13 @@ void Yui::setHistory()
 			)
 		);
 
-		if (GM::config.games[((Yui::getInstance().historyPage - 1) * 4) + i].gameType == GameType::IMPORT)
+		if (GM::getInstance().config.games[((Yui::getInstance().historyPage - 1) * 4) + i].gameType == GameType::IMPORT)
 			ui2t(6 + 2 * i)->textColor = glm::vec4(0.433f, 0.433f, 0.433f, 1.0f);
 
 		tm lt;
-		localtime_s(&lt, &GM::config.games[((Yui::getInstance().historyPage - 1) * 4) + i].time);
+		localtime_s(&lt, &GM::getInstance().config.games[((Yui::getInstance().historyPage - 1) * 4) + i].time);
 
-		ui2t(6 + (2 * i))->changeText(std::format("{}/{}/{} {}:{}{}\tPoints: {}", 1 + lt.tm_mon, lt.tm_mday, 1900 + lt.tm_year, lt.tm_hour, (lt.tm_min < 10) ? "0" : "", lt.tm_min, GM::config.games[Yui::getInstance().historyPage * i].sumOfRounds()));
+		ui2t(6 + (2 * i))->changeText(std::format("{}/{}/{} {}:{}{}\tPoints: {}", 1 + lt.tm_mon, lt.tm_mday, 1900 + lt.tm_year, lt.tm_hour, (lt.tm_min < 10) ? "0" : "", lt.tm_min, GM::getInstance().config.games[Yui::getInstance().historyPage * i].sumOfRounds()));
 	}
 
 	Yui::updateAll();
@@ -2915,8 +2915,8 @@ void Yui::setMarker()
 	if (Yui::getInstance().marker)
 		Yui::removeElement(Yui::getInstance().marker);
 
-	float markerAbsX = (float)(GM::mouseX / (float)*UIElement::WINDOWWIDTH);
-	float markerAbsY = (float)(*UIElement::WINDOWHEIGHT - GM::mouseY) / (float)*UIElement::WINDOWHEIGHT;
+	float markerAbsX = (float)(GM::getInstance().mouseX / (float)*UIElement::WINDOWWIDTH);
+	float markerAbsY = (float)(*UIElement::WINDOWHEIGHT - GM::getInstance().mouseY) / (float)*UIElement::WINDOWHEIGHT;
 
 	if (Yui::getInstance().minimapScaled)
 	{
@@ -2998,13 +2998,13 @@ void Yui::exportGame(unsigned gameIndex)
 	std::string clipboardString = std::format
 	(
 		"{:d};{:x};{:x};{:x};{:x};{:x};{:x}",
-		GM::config.games[correctIndex].difficulty,
-		GM::mapIDOf(GM::config.games[correctIndex].difficulty, GM::config.games[correctIndex].rounds[0].map.mapPath),
-		GM::mapIDOf(GM::config.games[correctIndex].difficulty, GM::config.games[correctIndex].rounds[1].map.mapPath),
-		GM::mapIDOf(GM::config.games[correctIndex].difficulty, GM::config.games[correctIndex].rounds[2].map.mapPath),
-		GM::mapIDOf(GM::config.games[correctIndex].difficulty, GM::config.games[correctIndex].rounds[3].map.mapPath),
-		GM::mapIDOf(GM::config.games[correctIndex].difficulty, GM::config.games[correctIndex].rounds[4].map.mapPath),
-		GM::config.games[correctIndex].sumOfRounds()
+		GM::getInstance().config.games[correctIndex].difficulty,
+		GM::getInstance().mapIDOf(GM::getInstance().config.games[correctIndex].difficulty, GM::getInstance().config.games[correctIndex].rounds[0].map.mapPath),
+		GM::getInstance().mapIDOf(GM::getInstance().config.games[correctIndex].difficulty, GM::getInstance().config.games[correctIndex].rounds[1].map.mapPath),
+		GM::getInstance().mapIDOf(GM::getInstance().config.games[correctIndex].difficulty, GM::getInstance().config.games[correctIndex].rounds[2].map.mapPath),
+		GM::getInstance().mapIDOf(GM::getInstance().config.games[correctIndex].difficulty, GM::getInstance().config.games[correctIndex].rounds[3].map.mapPath),
+		GM::getInstance().mapIDOf(GM::getInstance().config.games[correctIndex].difficulty, GM::getInstance().config.games[correctIndex].rounds[4].map.mapPath),
+		GM::getInstance().config.games[correctIndex].sumOfRounds()
 	);
 
 	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, clipboardString.size() + 1);

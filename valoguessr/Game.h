@@ -44,7 +44,7 @@ public:
 	// returns the sum of all 5 rounds' points
 	uint32_t sumOfRounds();
 
-	// equivalent to GM::gameSlot->rounds[GM::roundIndex]
+	// equivalent to GM::getInstance().gameSlot->rounds[GM::getInstance().roundIndex]
 	Round& getCurrentRound();
 };
 
