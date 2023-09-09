@@ -15,6 +15,7 @@ These are just a few screenshots to show what the UI looks like. If you would li
 <img src="../screenshots/mainMenu.png" width="650" height="370">
 <img src="../screenshots/play.png" width="650" height="370">
 <img src="../screenshots/settings.png" width="650" height="370">
+<img src="../screenshots/roundResults.png" width="650" height="370">
 
 ## How to play
 In the [releases page](https://github.com/declspecl/ValoGuessr/releases), download the newest release, navigate to the `/bin` folder, and run `valoguessr.exe`.
@@ -31,6 +32,7 @@ Then place the appropriate dlls from the `/dlls` folder in the same directory as
 
 ## Warnings
 In all my testing, the program has no memory leaks and (should) never crash. Though, if it does for you, I would be fascinated to learn why, so please let me know!
+
 Also, the scaling method of the program is very naiva and is truly meant to be used in a 16:9 aspect ratio. So, for your best interest, I would try to keep it in it's default resolution or try to resize it to be in 16:9.
 
 ## Dependencies
