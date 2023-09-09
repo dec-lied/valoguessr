@@ -11,7 +11,7 @@ At that time, there were only 8 maps, with Pearl being the most recent map. Unfo
 * You can share your previous games with friends or replay them yourself and compare the scores!
 
 ## Screenshots
-These are just a few screenshots to show what the UI looks like. If you would like to see more screenshots, go to the screenshots branch of this repo.
+These are just a few screenshots to show what the UI looks like. If you would like to see more screenshots, go to the [screenshots branch of this repo](https://github.com/declspecl/ValoGuessr/tree/screenshots).
 <img src="../screenshots/mainMenu.png" width="650" height="370">
 <img src="../screenshots/play.png" width="650" height="370">
 <img src="../screenshots/settings.png" width="650" height="370">
@@ -28,6 +28,10 @@ The Debug build mode should only be used for running the game from Visual Studio
 The Release build mode is what should be used when compiling the standalone executable.
 Create a `/bin` folder in `/valoguessr` and place the newly created valoguessr.exe into `/valoguessr/bin`.
 Then place the appropriate dlls from the `/dlls` folder in the same directory as valoguessr.exe, which should be /valoguessr/bin.
+
+## Warnings
+In all my testing, the program has no memory leaks and (should) never crash. Though, if it does for you, I would be fascinated to learn why, so please let me know!
+Also, the scaling method of the program is very naiva and is truly meant to be used in a 16:9 aspect ratio. So, for your best interest, I would try to keep it in it's default resolution or try to resize it to be in 16:9.
 
 ## Dependencies
 This project uses numerous libraries and dependencies. Here is a list of them:
