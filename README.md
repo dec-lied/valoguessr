@@ -16,8 +16,8 @@ These are just a few screenshots to show what the UI looks like. If you would li
 <img src="../screenshots/play.png" width="650" height="370">
 <img src="../screenshots/settings.png" width="650" height="370">
 
-## How to run
-In the releases tab, download the newest release, navigate to the /bin folder, and run valoguessr.exe.
+## How to play
+In the [releases page](https://github.com/declspecl/ValoGuessr/releases), download the newest release, navigate to the `/bin` folder, and run `valoguessr.exe`.
 
 ## Bulding from source
 First, run ```git clone https://github.com/declspecl/ValoGuessr```.
@@ -26,8 +26,8 @@ Then, navigate inside the ValoGuessr folder and open the sln file in Visual Stud
 The Debug build mode should only be used for running the game from Visual Studio, as the paths for the assets are dependent on it.
 
 The Release build mode is what should be used when compiling the standalone executable.
-Create a /bin folder in /valoguessr and place the newly created valoguessr.exe into /valoguessr/bin.
-Then place the appropriate dlls from the /dlls folder in the same directory as valoguessr.exe, which should be /valoguessr/bin.
+Create a `/bin` folder in `/valoguessr` and place the newly created valoguessr.exe into `/valoguessr/bin`.
+Then place the appropriate dlls from the `/dlls` folder in the same directory as valoguessr.exe, which should be /valoguessr/bin.
 
 ## Dependencies
 This project uses numerous libraries and dependencies. Here is a list of them:
