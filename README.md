@@ -3,7 +3,7 @@
 ValoGuessr is an open source GeoGuessr-esque windows desktop application for Valorant!
 
 I made this game for my HL IB Computer Science Internal Assessment (although mostly for fun and experience) which was taking place in December of 2022.
-At that time, there were only 8 maps, with Pearl being the most recent map. I do not plan to add any future maps, but if people really want it then I will!
+At that time, there were only 8 maps, with Pearl being the most recent map. Unfortunately, I do not plan to add any additional maps because the code is a bit 🥴.
 
 ## Features
 * This game is written entirely in C++, using barebones OpenGL and GLFW for graphics and features my custom (elementary) UI engine!
