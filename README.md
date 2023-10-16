@@ -3,7 +3,7 @@
 ValoGuessr is an open source GeoGuessr-like windows desktop application for Valorant!
 
 I made this game for my HL IB Computer Science Internal Assessment (although mostly for fun and experience) which was taking place in December of 2022.
-At that time, there were only 8 maps, with Pearl being the most recent map. Unfortunately, I do not plan to add any additional maps because the code is a bit 🥴.
+At that time, there were only 8 maps, with Pearl being the most recent map.
 
 ## Features
 * This game is written entirely in C++, using barebones OpenGL and GLFW for graphics and features my custom (elementary) UI engine!
@@ -30,10 +30,8 @@ The Release build mode is what should be used when compiling the standalone exec
 Create a `/bin` folder in `/valoguessr` and place the newly created valoguessr.exe into `/valoguessr/bin`.
 Then place the appropriate dlls from the `/dlls` folder in the same directory as valoguessr.exe, which should be /valoguessr/bin.
 
-## Warnings
-In all my testing, the program has no memory leaks and (should) never crash. Though, if it does for you, I would be fascinated to learn why, so please let me know!
-
-Also, the scaling method of the program is very naive and is truly meant to be used in a 16:9 aspect ratio. So, for your best interest, I would try to keep it in it's default resolution or try to resize it to be in 16:9.
+## Notice
+The scaling method of the program is very naive and is truly meant to be used in a 16:9 aspect ratio. So, for your best interest, I would try to keep it in it's default resolution or try to resize it to be in 16:9.
 
 ## Dependencies
 This project uses numerous libraries and dependencies. Here is a list of them:
